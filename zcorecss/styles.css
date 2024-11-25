@@ -1,0 +1,26 @@
+.b-e {
+  border: 1px solid #d4d8dc;
+}
+
+.b-b-e {
+  border-bottom: 1px solid #d4d8dc;
+}
+
+.bg-admin {
+  background-color: #de4927;
+}
+
+a {
+  color: #1c2439;
+  text-decoration: none;
+}
+
+.bg-hov-e:hover {
+  background-color: #f3f5f6;
+}
+
+.bg {
+  background-color: #e8ebed;
+}
+
+/*# sourceMappingURL=styles.css.map */

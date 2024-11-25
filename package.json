@@ -4,7 +4,7 @@
   },
   "scripts": {
     "build": "sass mastors.scss mastors.css",
-    "sass": "sass --watch styles/zcorecss/styles.scss styles/zcorecss/styles.css"
+    "sass": "sass --watch zcorecss/styles.scss zcorecss/styles.css"
   },
   "name": "Mastors Ecommerce",
   "version": "1.0.0",
