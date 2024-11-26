@@ -1,28 +1,3 @@
-.b-e {
-  border: 1px solid #d4d8dc;
-}
-
-.b-b-e {
-  border-bottom: 1px solid #d4d8dc;
-}
-
-.bg-admin {
-  background-color: #de4927;
-}
-
-a {
-  color: #1c2439;
-  text-decoration: none;
-}
-
-.bg-hov-e:hover {
-  background-color: #f3f5f6;
-}
-
-.bg {
-  background-color: #e8ebed;
-}
-
 li {
   list-style: none;
 }
@@ -37,11 +12,13 @@ li {
     width: 30%;
   }
 }
+
 @media screen and (max-width: 768px) {
   .leftnav {
     width: 4rem;
   }
 }
+
 .arrowpos {
   position: absolute;
   width: auto;
@@ -94,7 +71,6 @@ li {
 .bg-hov-e {
   background-color: #eeeeee;
 }
-
 /* JSU */
 .arrowposimg {
   rotate: 0deg !important;
@@ -108,7 +84,6 @@ li {
   overflow-y: scroll;
   overflow-x: visible;
 }
-
 .ecom-navs::-webkit-scrollbar {
   display: none;
 }
@@ -233,24 +208,31 @@ li {
   transition: all 0.3s ease;
 }
 
+// HIDE FORCE
 .hideImp {
   display: none !important;
 }
 
+// OVERFLOW HIDDEN
 .ov-hidden {
   overflow: hidden;
 }
 
+// JSU
+// NO SUBCAT ICON CENTER
 .nosubcaticon {
   justify-content: center !important;
   margin-left: 0 !important;
   padding: 0.4rem 0;
 }
 
+// JSU
+// CAT ICON SIZE INCREASE
 .caticonInc {
   width: 1.5rem !important;
 }
 
+// NAV SEARCH BAR
 .searchcat {
   position: relative;
   background-color: #e6eae9;
@@ -274,12 +256,10 @@ li {
 
 .searchcat input:focus {
   outline-width: 2px;
-  box-shadow: 0 0 0 0.15rem rgba(24, 112, 244, 0.2509803922);
+  box-shadow: 0 0 0 0.15rem #1870f440;
   transition: all 0.3s ease;
 }
 
 .searchcat input::placeholder {
   font-style: italic;
 }
-
-/*# sourceMappingURL=styles.css.map */

@@ -15,192 +15,8 @@
 
     <link rel="stylesheet" href="https://surajit-singha-sisir.github.io/mastorsCDN/mastors.css">
     <script type="module" src="https://cdn.jsdelivr.net/gh/surajit-singha-sisir/mastorsCDN@v1.0.05/mastors.js"></script>
+    <script src="../scripts/zcorejs/scripts.js"></script>
 </head>
-<style>
-    li {
-        list-style: none;
-    }
-
-    .leftnav {
-        width: 20%;
-        background-color: #F3F5F6;
-    }
-
-    @media screen and (max-width: 1080px) {
-        .leftnav {
-            width: 30%;
-        }
-    }
-
-    @media screen and (max-width: 768px) {
-        .leftnav {
-            width: 3rem;
-        }
-    }
-
-    .arrowpos {
-        position: absolute;
-        width: auto;
-        top: 2.4rem;
-        right: -0.7rem;
-        cursor: pointer;
-        z-index: 5;
-    }
-
-    .arrowpos::before {
-        content: '';
-        position: absolute;
-        width: 2.5rem;
-        aspect-ratio: 1;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        padding: 0.2rem;
-        background-color: #e8ebed;
-        border: 3px solid #d4d8dc;
-        border-radius: 50%;
-        z-index: -1;
-        transition: all 0.3s ease;
-    }
-
-    .arrowpos::after {
-        content: '';
-        position: absolute;
-        width: 3rem;
-        aspect-ratio: 1;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        padding: 0.2rem;
-        background-color: #ffffff;
-        border-radius: 50%;
-        z-index: -2;
-    }
-
-    .arrowpos:hover::before {
-        background-color: #ffffff;
-        transition: all 0.3s ease;
-    }
-
-    .arrowpos img {
-        rotate: 0deg;
-        transition: all 0.3s ease;
-    }
-
-    /* JSU */
-    /* .arrowposimg {
-        rotate: -180deg !important;
-        transition: all 0.3s ease;
-    } */
-
-    /* MENU BAR */
-    .ecom-navs {
-        position: relative;
-        margin-top: 2rem;
-        height: 80%;
-        overflow-y: scroll;
-        overflow-x: auto;
-    }
-
-    .ecom-navs a {
-        display: block;
-    }
-
-    .ecom-navs .nosubcat {
-        border-bottom: 1px solid #d4d8dc;
-    }
-
-    .ecom-navs ul li {
-        display: block;
-    }
-
-    .ecom-navs ul li a {
-        display: block;
-    }
-
-    .ecom-navs ul li a:hover {
-        background-color: #dfe2e4;
-    }
-
-    .ecom-navs ul li a p {
-        padding: 0.5rem 0;
-        text-align: left;
-        font-size: 1.2rem;
-    }
-
-    .ecom-navs .ecat {
-        position: relative;
-        display: flex;
-        gap: 1rem;
-        margin-left: 15%;
-    }
-
-    .ecom-navs .ecat div {
-        display: flex;
-        align-items: center;
-    }
-
-    .ecom-navs .subecats {
-        position: relative;
-        padding: 1rem 0;
-    }
-
-    /* SUB CATS */
-    .esubcats .ecatnoclick {
-        position: relative;
-        display: flex;
-        gap: 1rem;
-        justify-content: space-between;
-        padding: 0.5rem 0;
-        font-size: 1.2rem;
-        cursor: pointer;
-        width: 100%;
-        border-bottom: 1px solid #d4d8dc;
-    }
-
-    .esubcats .ecatnoclick:hover {
-        background-color: #ededed;
-    }
-
-    .esubcats .ecatnoclick .maincatname {
-        display: flex;
-        gap: 1rem;
-        margin-left: 15%;
-    }
-
-    .esubcats ul {
-        position: relative;
-    }
-
-    .esubcats ul li {
-        position: relative;
-        background-color: #f1f1f2;
-        border-bottom: 1px solid #d4d8dc;
-    }
-
-    .esubcats ul li {
-        display: block;
-    }
-
-    .esubcats ul li p {
-        font-size: 1.1rem !important;
-    }
-
-    .esubcats ul li div {
-        margin-left: 8%;
-    }
-
-    .chevron {
-        rotate: 0deg;
-        transition: all 0.3s ease;
-    }
-
-    /* JSU */
-    /* .chevronrotate {
-        rotate: -90deg;
-        transition: all 0.3s ease;
-    } */
-</style>
 
 <body>
     <!-- TOP BAR -->
@@ -226,34 +42,39 @@
     <!-- TOP BAR END -->
 
     <!-- NAVBAR -->
-    <nav class="fixed pos-t--60 pos-top-left bg leftnav h-100 bg">
+    <nav class="fixed pos-t--60 pos-top-left bg leftnav h-100 bg" id="enavigator">
         <!-- COMPANY LOGO -->
         <div class="relative">
             <!-- COMPANY NAME -->
-            <a href="#" class="f gap-05 h--30 bg-hov-e b-b-e f-just-center f-align-items-center pad--05">
+            <a href="#" class="f gap-05 h--30 bg-hov-e b-b-e f-just-center f-align-items-center pad--05 ov-hidden"
+                id="companylogo">
                 <span class="h--15"><img class="img-h-res" src="../resources/icons/camerasales.svg" alt=""></span>
-                <span class="f b text-center text--l pad-lr--08 pad-tb--01">Camerasales</span>
+                <span id="companyname" class="f b text-center text--l pad-lr--08 pad-tb--01">Camerasales</span>
             </a>
             <!-- ARROW -->
-            <div class="arrowpos" title="Click to Expand or Zip the Menubar">
-                <img class="w--11 arrowposimg" src="../resources/icons/right-arrow.svg" alt="">
+            <div class="arrowpos" title="Click to Expand or Zip the Menubar" onclick="arrowpos(this)">
+                <img class="w--11" src="../resources/icons/right-arrow.svg" alt="">
             </div>
         </div>
 
+        <!-- SEARCH -->
+        <div class="searchcat">
+            <input type="text" placeholder="Search" title="Click 'Esc' to clean search">
+        </div>
+
         <!-- MENU ITEMS -->
-        <section class="ecom-navs">
+        <section class="ecom-navs" id="ecom-navs">
             <!-- DASHBOARD -->
             <ul class="nosubcat">
                 <li><a href="#">
                         <span class="ecat">
-                            <div class="icon w--12">
+                            <div class="nosubcaticon w--12">
                                 <img class="img-w-res" src="../resources/icons/home.svg" alt="">
                             </div>
                             <p>Dashboard</p>
                         </span>
                     </a></li>
             </ul>
-
             <!-- Orders -->
             <div class="esubcats">
                 <span class="ecatnoclick">
@@ -268,7 +89,7 @@
                     </div>
                 </span>
                 <!-- SUB CATS -->
-                <ul>
+                <ul class="ulsubcates">
                     <li>
                         <a href="#">
                             <span class="ecat">
@@ -316,7 +137,7 @@
                     </div>
                 </span>
                 <!-- SUB CATS -->
-                <ul>
+                <ul class="ulsubcates">
                     <!-- Manage Sales -->
                     <li>
                         <a href="#">
@@ -400,7 +221,7 @@
                     </div>
                 </span>
                 <!-- SUB CATS -->
-                <ul>
+                <ul class="ulsubcates">
                     <!-- Manage Products -->
                     <li>
                         <a href="#">
@@ -447,7 +268,11 @@
                     </li>
                 </ul>
             </div>
-
+            <style>
+                .ecom-navs .esubcats:last-child {
+                    padding-bottom: 15rem;
+                }
+            </style>
             <!-- Product Suppliers -->
             <div class="esubcats">
                 <span class="ecatnoclick">
@@ -462,7 +287,7 @@
                     </div>
                 </span>
                 <!-- SUB CATS -->
-                <ul>
+                <ul class="ulsubcates">
                     <!-- Product Suppliers -->
                     <li>
                         <a href="#">
@@ -513,7 +338,7 @@
                     </div>
                 </span>
                 <!-- SUB CATS -->
-                <ul>
+                <ul class="ulsubcates">
                     <!-- Manage Category -->
                     <li>
                         <a href="#">
@@ -575,7 +400,7 @@
                     </div>
                 </span>
                 <!-- SUB CATS -->
-                <ul>
+                <ul class="ulsubcates">
                     <!-- Manage Brand -->
                     <li>
                         <a href="#">
@@ -626,7 +451,7 @@
                     </div>
                 </span>
                 <!-- SUB CATS -->
-                <ul>
+                <ul class="ulsubcates">
                     <!-- Manage Accounts -->
                     <li>
                         <a href="#">
@@ -677,7 +502,7 @@
                     </div>
                 </span>
                 <!-- SUB CATS -->
-                <ul>
+                <ul class="ulsubcates">
                     <!-- Header -->
                     <li>
                         <a href="#">
@@ -739,7 +564,7 @@
                     </div>
                 </span>
                 <!-- SUB CATS -->
-                <ul>
+                <ul class="ulsubcates">
                     <!-- Page Manager -->
                     <li>
                         <a href="#">
@@ -801,7 +626,7 @@
                     </div>
                 </span>
                 <!-- SUB CATS -->
-                <ul>
+                <ul class="ulsubcates">
                     <!-- Facebook Setup -->
                     <li>
                         <a href="#">
@@ -885,7 +710,7 @@
                     </div>
                 </span>
                 <!-- SUB CATS -->
-                <ul>
+                <ul class="ulsubcates">
                     <!-- Courier Manager -->
                     <li>
                         <a href="#">
@@ -955,11 +780,13 @@
                 </ul>
             </div>
 
-
-
         </section>
     </nav>
     <!-- NAVBAR END -->
 </body>
+<script>
+
+
+</script>
 
 </html>
