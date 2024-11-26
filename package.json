@@ -1,33 +1,16 @@
 {
-  "dependencies": {
-    "sass": "^1.79.4"
-  },
+  "name": "fronend",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
     "build": "sass mastors.scss mastors.css",
-    "sass": "sass --watch zcorecss/styles.scss zcorecss/styles.css"
+    "sass": "sass --watch styles.scss:styles.css"
   },
-  "name": "Mastors Ecommerce",
-  "version": "1.0.0",
-  "description": "An Opensource Front-end Framework",
-  "main": "scripts/zcorejs/scripts.js",
-  "devDependencies": {},
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/surajit-singha-sisir/mastorsCDN.git"
-  },
-  "keywords": [
-    "framework",
-    "front-end",
-    "framework",
-    "responsive",
-    "web",
-    "design",
-    "framework"
-  ],
-  "author": "Surajit Singha Sisir",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/surajit-singha-sisir/mastorsCDN/issues"
-  },
-  "homepage": "https://github.com/surajit-singha-sisir/mastorsCDN#readme"
+  "description": "",
+  "devDependencies": {
+    "sass": "^1.81.0"
+  }
 }
