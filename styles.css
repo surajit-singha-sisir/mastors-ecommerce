@@ -27,6 +27,10 @@ li {
   list-style: none;
 }
 
+.bg-hov-e {
+  background-color: #eeeeee;
+}
+
 .leftnav {
   width: 20%;
   background-color: #f3f5f6;
@@ -39,7 +43,7 @@ li {
 }
 @media screen and (max-width: 768px) {
   .leftnav {
-    width: 4rem;
+    width: 10rem;
   }
 }
 .arrowpos {
@@ -50,7 +54,6 @@ li {
   cursor: pointer;
   z-index: 5;
 }
-
 .arrowpos::before {
   content: "";
   position: absolute;
@@ -66,7 +69,6 @@ li {
   z-index: -1;
   transition: all 0.3s ease;
 }
-
 .arrowpos::after {
   content: "";
   position: absolute;
@@ -80,19 +82,13 @@ li {
   border-radius: 50%;
   z-index: -2;
 }
-
 .arrowpos:hover::before {
   background-color: #ffffff;
   transition: all 0.3s ease;
 }
-
 .arrowpos img {
   rotate: -180deg;
   transition: all 0.3s ease;
-}
-
-.bg-hov-e {
-  background-color: #eeeeee;
 }
 
 /* JSU */
@@ -108,49 +104,39 @@ li {
   overflow-y: scroll;
   overflow-x: visible;
 }
-
 .ecom-navs::-webkit-scrollbar {
   display: none;
 }
-
 .ecom-navs a {
   display: block;
 }
-
 .ecom-navs .nosubcat {
   border-bottom: 1px solid #d4d8dc;
 }
-
 .ecom-navs ul li {
   display: block;
 }
-
 .ecom-navs ul li a {
   display: block;
 }
-
 .ecom-navs ul li a:hover {
   background-color: #dfe2e4;
 }
-
 .ecom-navs ul li a p {
   padding: 0.5rem 0;
   text-align: left;
   font-size: 1.2rem;
 }
-
 .ecom-navs .ecat {
   position: relative;
   display: flex;
   gap: 1rem;
   margin-left: 15%;
 }
-
 .ecom-navs .ecat div {
   display: flex;
   align-items: center;
 }
-
 .ecom-navs .subecats {
   position: relative;
   padding: 1rem 0;
@@ -169,11 +155,9 @@ li {
   width: 100%;
   border-bottom: 1px solid #d4d8dc;
 }
-
 .esubcats .ecatnoclick:hover {
   background-color: #ededed;
 }
-
 .esubcats .ecatnoclick .maincatname {
   display: flex;
   align-items: center;
@@ -193,21 +177,15 @@ li {
 .esubcats ul {
   position: relative;
 }
-
 .esubcats ul li {
   position: relative;
   background-color: #f1f1f2;
   border-bottom: 1px solid #d4d8dc;
-}
-
-.esubcats ul li {
   display: block;
 }
-
 .esubcats ul li p {
   font-size: 1.1rem !important;
 }
-
 .esubcats ul li div {
   margin-left: 8%;
 }
@@ -261,7 +239,6 @@ li {
   justify-content: center;
   transition: all 0.3s ease;
 }
-
 .searchcat input {
   position: relative;
   width: 80%;
@@ -271,13 +248,11 @@ li {
   border-radius: 5px;
   transition: all 0.3s ease;
 }
-
 .searchcat input:focus {
   outline-width: 2px;
   box-shadow: 0 0 0 0.15rem rgba(24, 112, 244, 0.2509803922);
   transition: all 0.3s ease;
 }
-
 .searchcat input::placeholder {
   font-style: italic;
 }

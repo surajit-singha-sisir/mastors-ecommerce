@@ -8,48 +8,54 @@ function arrowpos(x) {
   function zipunzip() {
     const navwidth = document.getElementById("enavigator");
     navwidth.classList.toggle("navwidth");
+    // HIDE MENU TEXT
+    function hideMenuText() {
+      // HIDE COMPANY LOGO
+      const logo = document.getElementById("companylogo");
+      logo.querySelector("#companyname").classList.toggle("hideImp");
 
+      // HIDE NO SUBCAT NAME
+      const nosubcat = document.querySelectorAll(".nosubcat p");
+      nosubcat.forEach((p) => p.classList.toggle("hide"));
+      // CAT ICON CENTER
+      const nosubcaticon = document.querySelectorAll(".nosubcat .ecat");
+      nosubcaticon.forEach((m) => m.classList.toggle("nosubcaticon"));
+
+      // HIDE MAIN CAT NAME
+      const menu = document.querySelectorAll(".maincatname p");
+      menu.forEach((p) => p.classList.toggle("hide"));
+
+      // HIDE CHEVRON
+      const chevron = document.querySelectorAll(".ecatnoclick .chevron");
+      chevron.forEach((c) => c.classList.toggle("hide"));
+
+      // CAT ICON CENTER
+      const mecatnoclick = document.querySelectorAll(
+        ".esubcats .ecatnoclick .maincatname"
+      );
+      mecatnoclick.forEach((m) => m.classList.toggle("mecatnoclick"));
+      //   CAT ICON INCREASE
+      const catIconInc = document.querySelectorAll(
+        ".esubcats .ecatnoclick .maincatname div:nth-child(1)"
+      );
+      catIconInc.forEach((m) => m.classList.toggle("caticonInc"));
+
+      //   SUBCAT HIDE
+      const subcats = document.querySelectorAll(".esubcats ul");
+      subcats.forEach((subcats) => subcats.classList.toggle("hide"));
+    }
     hideMenuText();
   }
   zipunzip();
 }
-
-// HIDE MENU TEXT
-function hideMenuText() {
-  // HIDE COMPANY LOGO
-  const logo = document.getElementById("companylogo");
-  logo.querySelector("#companyname").classList.toggle("hideImp");
-
-  // HIDE NO SUBCAT NAME
-  const nosubcat = document.querySelectorAll(".nosubcat p");
-  nosubcat.forEach((p) => p.classList.toggle("hide"));
-  // CAT ICON CENTER
-  const nosubcaticon = document.querySelectorAll(".nosubcat .ecat");
-  nosubcaticon.forEach((m) => m.classList.toggle("nosubcaticon"));
-
-  // HIDE MAIN CAT NAME
-  const menu = document.querySelectorAll(".maincatname p");
-  menu.forEach((p) => p.classList.toggle("hide"));
-
-  // HIDE CHEVRON
-  const chevron = document.querySelectorAll(".ecatnoclick .chevron");
-  chevron.forEach((c) => c.classList.toggle("hide"));
-
-  // CAT ICON CENTER
-  const mecatnoclick = document.querySelectorAll(
-    ".esubcats .ecatnoclick .maincatname"
-  );
-  mecatnoclick.forEach((m) => m.classList.toggle("mecatnoclick"));
-  //   CAT ICON INCREASE
-  const catIconInc = document.querySelectorAll(
-    ".esubcats .ecatnoclick .maincatname div:nth-child(1)"
-  );
-  catIconInc.forEach((m) => m.classList.toggle("caticonInc"));
-
-  //   SUBCAT HIDE
-  const subcats = document.querySelectorAll(".esubcats ul");
-  subcats.forEach((subcats) => subcats.classList.toggle("hide"));
-}
+// F1 KEY TO EXPAND OPERATION of ARROWPOS
+document.addEventListener("keydown", function (e) {
+  if (e.key === "F1") {
+    e.preventDefault();
+    const arrowElement = document.querySelector(".arrowpos");
+    arrowpos(arrowElement);
+  }
+});
 
 // function absSubMenus() {
 //   const mainDiv = document.querySelectorAll(".esubcats");
