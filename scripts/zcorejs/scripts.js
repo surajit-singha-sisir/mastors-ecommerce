@@ -1,4 +1,28 @@
 print = console.log;
+
+
+// USER PROFILE
+function userProfile(x) {
+  const user = x.querySelector('#profile-det');
+  user.classList.toggle('hide');
+
+  // Click outside logic
+  function handleClickOutside(event) {
+    if (!x.contains(event.target)) {
+      user.classList.add('hide');
+      document.removeEventListener('click', handleClickOutside);
+    }
+  }
+
+  // Add listener to document when the profile is shown
+  if (!user.classList.contains('hide')) {
+    document.addEventListener('click', handleClickOutside);
+  }
+}
+
+
+
+
 // ARROW
 function arrowpos(x) {
   const icon = x.querySelector("img");
@@ -56,22 +80,6 @@ document.addEventListener("keydown", function (e) {
     arrowpos(arrowElement);
   }
 });
-
-// function absSubMenus() {
-//   const mainDiv = document.querySelectorAll(".esubcats");
-
-//   mainDiv.forEach((cat) => {
-//     const category = cat.querySelector(".ecatnoclick");
-//     const catBlock = cat.querySelector(".ulsubcates");
-
-//     cat.onclick = () => {
-//       print(category, catBlock);
-//     };
-//   });
-// }
-// window.addEventListener("DOMContentLoaded", () => {
-//   absSubMenus();
-// });
 
 // SEARCH FUNCTION
 document.addEventListener("DOMContentLoaded", () => {
@@ -156,3 +164,5 @@ document.addEventListener("DOMContentLoaded", () => {
     icon.classList.add("chevron"); // Ensure the default class is chevron
   });
 });
+
+

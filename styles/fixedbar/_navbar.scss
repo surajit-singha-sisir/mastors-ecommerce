@@ -1,3 +1,5 @@
+@use "../variables" as *;
+
 li {
   list-style: none;
 }
@@ -23,6 +25,62 @@ li {
   }
 }
 
+// PROFILE
+.profile-det {
+  position: absolute;
+  width: 10rem;
+  right: 0;
+  top: 4rem;
+  background-color: #fff;
+  border: 1px solid #d4d8dc;
+
+  & span {
+    & a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      padding: 0.5rem 0;
+      background-color: $profilebg;
+      color: #333;
+      border: none;
+      border-bottom: 1px solid $border;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #e6e7e9;
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      width: 1rem;
+      aspect-ratio: 1;
+      background-color: $profilebg;
+      top: -1rem;
+      right: 1rem;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    }
+
+    &:hover::before {
+      background-color: #e6e7e9;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 1rem;
+      aspect-ratio: 1;
+      background-color: #d4d8dc;
+      top: -1rem;
+      right: 1rem;
+      clip-path: polygon(0 100%, 50% 0%, 100% 100%, 90% 100%, 50% 20%, 12% 100%);
+    }
+  }
+}
+
+// NAV
 .arrowpos {
   position: absolute;
   width: auto;

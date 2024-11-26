@@ -20,7 +20,7 @@
 
 <body>
     <!-- TOP BAR -->
-    <section class="w-100 h--55 fixed pos-top-center bg">
+    <aside class="w-100 h--55 fixed pos-top-center bg">
         <div class="f f-just-between w-95 pad--10 m-auto">
             <a href="#" class="d-block w--70">
                 <img class="img-w-res" src="../resources/icons/mastors-logo.svg" alt="">
@@ -32,13 +32,19 @@
                         <p>Admin</p>
                     </span>
                 </div>
-                <div class="d-block w--30 c-pointer">
+                <div class="d-block w--30 c-pointer relative" onclick="userProfile(this)">
                     <img class="img-w-res" src="../resources/icons/user-icon.svg" alt="">
+                    <div class="profile-det hide" id="profile-det">
+                        <span class="f f-col">
+                            <a href="#">My Profile</a>
+                            <a href="#">Logout</a>
+                        </span>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="pad-b--07 b-b-e"></div>
-    </section>
+    </aside>
     <!-- TOP BAR END -->
 
     <!-- NAVBAR -->
