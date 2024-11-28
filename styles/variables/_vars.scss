@@ -4,10 +4,8 @@ $text: #1c2439;
 $subtext: #272f43;
 $litetext: #888c97;
 $border: #d4d8dc;
-
 $topbarbg: #d9d9d9;
 $admin: #de4927;
-$topbarbg: #d9d9d9;
 $profilebg: #f3f5f6;
 
 .b-e {
@@ -25,4 +23,10 @@ a {
 }
 .bg-hov-e:hover {
   background-color: $bg2;
+}
+.bg-top {
+  background-color: $topbarbg;
+}
+.bg-main {
+  background-color: $bg;
 }

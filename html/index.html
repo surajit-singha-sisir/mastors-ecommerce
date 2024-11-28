@@ -12,15 +12,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Noto+Emoji:wght@300..700&display=swap"
         rel="stylesheet">
-
     <link rel="stylesheet" href="https://surajit-singha-sisir.github.io/mastorsCDN/mastors.css">
     <script type="module" src="https://cdn.jsdelivr.net/gh/surajit-singha-sisir/mastorsCDN@v1.0.05/mastors.js"></script>
+    <script src="../scripts/fixedbar/navbar.js"></script>
+    <script src="../scripts/index/index.js"></script>
     <script src="../scripts/zcorejs/scripts.js"></script>
 </head>
 
-<body>
+<body class="bg">
     <!-- TOP BAR -->
-    <aside class="w-100 h--55 fixed pos-top-center bg">
+    <aside class="w-100 h--55 fixed pos-top-center bg z-5 b-b-e bg-top">
         <div class="f f-just-between w-95 pad--10 m-auto">
             <a href="#" class="d-block w--70">
                 <img class="img-w-res" src="../resources/icons/mastors-logo.svg" alt="">
@@ -43,12 +44,11 @@
                 </div>
             </div>
         </div>
-        <div class="pad-b--07 b-b-e"></div>
     </aside>
     <!-- TOP BAR END -->
 
     <!-- NAVBAR -->
-    <nav class="fixed pos-t--60 pos-top-left bg leftnav h-100 bg" id="enavigator">
+    <nav class="fixed pos-t--55 pos-top-left bg leftnav h-100 bg z-5" id="enavigator">
         <!-- COMPANY LOGO -->
         <div class="relative">
             <!-- COMPANY NAME -->
@@ -59,7 +59,7 @@
             </a>
             <!-- ARROW -->
             <div class="arrowpos" title="Click to Expand or Zip the Menubar" onclick="arrowpos(this)">
-                <img class="w--11" src="../resources/icons/right-arrow.svg" alt="">
+                <img class="w--08" src="../resources/icons/right-arrow.svg" alt="">
             </div>
         </div>
 
@@ -274,11 +274,6 @@
                     </li>
                 </ul>
             </div>
-            <style>
-                .ecom-navs .esubcats:last-child {
-                    padding-bottom: 15rem;
-                }
-            </style>
             <!-- Product Suppliers -->
             <div class="esubcats">
                 <span class="ecatnoclick">
@@ -792,7 +787,7 @@
 
 
     <!-- MAIN START -->
-    <main>
+    <main class="main bg" id="main">
         <!-- BREADCRUMB START -->
         <div class="breadcrumb">
             <div class="container">
@@ -804,6 +799,7 @@
             </div>
         </div>
         <!-- BREADCRUMB END -->
+
     </main>
     <!-- MAIN END -->
 </body>
