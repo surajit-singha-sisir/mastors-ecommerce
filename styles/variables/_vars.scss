@@ -1,5 +1,6 @@
 $bg: #e8ebed;
 $bg2: #f3f5f6;
+$bg3: #f0f7fa;
 $text: #1c2439;
 $subtext: #272f43;
 $litetext: #888c97;
@@ -7,6 +8,7 @@ $border: #d4d8dc;
 $topbarbg: #d9d9d9;
 $admin: #de4927;
 $profilebg: #f3f5f6;
+$currency: #0942ff;
 
 .b-e {
   border: 1px solid $border;
@@ -29,4 +31,24 @@ a {
 }
 .bg-main {
   background-color: $bg;
+}
+.bg-2 {
+  background-color: $bg2;
+}
+
+.bg-3 {
+  background-color: $bg3;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}
+.bg-Currency {
+  background-color: $currency !important;
+}
+.w--25i {
+  width: 25rem !important;
+}
+.currency {
+  color: white !important;
 }

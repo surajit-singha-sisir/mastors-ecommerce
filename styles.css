@@ -27,6 +27,30 @@ a {
   background-color: #e8ebed;
 }
 
+.bg-2 {
+  background-color: #f3f5f6;
+}
+
+.bg-3 {
+  background-color: #f0f7fa;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+.bg-Currency {
+  background-color: #0942ff !important;
+}
+
+.w--25i {
+  width: 25rem !important;
+}
+
+.currency {
+  color: white !important;
+}
+
 .bg {
   background-color: #e8ebed;
 }
@@ -286,7 +310,7 @@ li {
 .searchcat {
   position: relative;
   background-color: #e6eae9;
-  padding: 10px;
+  padding: 10px !important;
   margin-bottom: 10px;
   width: 100%;
   display: flex;
@@ -296,7 +320,7 @@ li {
 .searchcat input {
   position: relative;
   width: 80%;
-  padding: 5px;
+  padding: 0.5rem !important;
   outline: none;
   border-color: transparent;
   border-radius: 5px;
@@ -318,7 +342,7 @@ li {
   top: 6rem;
   left: 21.5%; /*NAV */
   width: 74.5%;
-  height: 100%;
+  height: max-content;
   z-index: 3;
   background-color: #f3f5f6;
   border: 1px solid #d4d8dc;
@@ -329,7 +353,7 @@ li {
 
 .mainexp {
   left: 5rem !important;
-  width: calc(100% - 5rem);
+  width: calc(100% - 6rem);
   transition: all 0.3s ease;
 }
 
@@ -342,6 +366,14 @@ li {
   .mainexp {
     width: calc(100% - 6rem);
   }
+}
+.thislegend {
+  font-size: 1.2rem;
+  padding: 0.2rem 1rem;
+  border-top: 1px solid #ccc;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  background-color: #f0f7fa;
 }
 
 /*# sourceMappingURL=styles.css.map */
