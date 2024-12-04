@@ -1,0 +1,60 @@
+{
+  "Size": ["S", "M", "L", "XL", "XXL"],
+  "Color": [
+    "Black",
+    "White",
+    "Gray",
+    "Red",
+    "Ash",
+    "Olive",
+    "Green",
+    "Beige",
+    "Cyan",
+    "Lime",
+    "Maroon",
+    "Navy",
+    "Navy Blue",
+    "Coral"
+  ],
+  "Weight": [
+    "100gm",
+    "200gm",
+    "300gm",
+    "400gm",
+    "500gm",
+    "600gm",
+    "700gm",
+    "800gm",
+    "900gm",
+    "1kg",
+    "1.5kg",
+    "2kg",
+    "2.5kg",
+    "3kg",
+    "4kg",
+    "5kg",
+    "6kg"
+  ],
+  "Gift Item": [
+    "Birthday Gift",
+    "Marriage Gift",
+    "Relationship Gift",
+    "Ceremony Gift"
+  ],
+  "Kid": ["New Born", "1 Year", "2 Year", "3 Year", "4 Year", "5 Year"],
+  "Youth": [
+    "6 Year",
+    "7 Year",
+    "8 Year",
+    "9 Year",
+    "10 Year",
+    "11 Year",
+    "12 Year",
+    "13 Year",
+    "14 Year",
+    "15 Year",
+    "16 Year",
+    "17 Year"
+  ],
+  "No Attribute": "No Attribute"
+}

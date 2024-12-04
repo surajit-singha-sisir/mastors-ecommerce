@@ -40,15 +40,21 @@ a {
 }
 
 .bg-Currency {
+  width: 100% !important;
   background-color: #0942ff !important;
 }
 
-.w--25i {
-  width: 25rem !important;
+.f-0 {
+  flex: 0 !important;
 }
 
 .currency {
   color: white !important;
+}
+
+.plus {
+  color: #fff;
+  background-color: #06be1e;
 }
 
 .bg {
@@ -374,6 +380,108 @@ li {
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   background-color: #f0f7fa;
+}
+
+.f-res2 {
+  display: flex;
+}
+.f-res2 > div, .f-res2 > section, .f-res2 > span {
+  flex: 1;
+}
+
+@media screen and (max-width: 1080px) {
+  .f-res2 {
+    flex-wrap: wrap;
+  }
+}
+.attributes {
+  position: relative;
+}
+.attributes legend {
+  padding: 0 1rem;
+  border: 1px solid #ccc;
+  background-color: #f0f7fa;
+  font-size: 1.3rem;
+  margin: auto;
+}
+
+button[type=submit] {
+  padding: 0.5rem 1rem;
+  background-color: #2041fa;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+button[type=submit]:hover {
+  background-color: rgb(76.8934210526, 103.25, 251.0065789474);
+  transition: background-color 0.3s ease;
+}
+
+.hide {
+  display: none !important;
+}
+
+.attributeTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+}
+.attributeTable thead {
+  background-color: #F3F5F6;
+  border: 1px solid #ccc;
+}
+.attributeTable tbody {
+  background-color: #e8ebed;
+}
+.attributeTable tr {
+  border: 1px solid #ccc;
+  transition: background-color 0.3s ease;
+}
+.attributeTable tr th {
+  padding: 0.5rem;
+  border: none;
+  text-align: center;
+}
+.attributeTable tr td {
+  padding: 0.5rem;
+  border: none;
+  text-align: center;
+}
+.attributeTable tr td input {
+  margin: auto;
+  width: 5rem;
+  height: 2rem;
+  padding: 0.2rem !important;
+  text-align: center;
+}
+.attributeTable tr td input::placeholder {
+  text-align: center;
+}
+
+.attrDeleteBtn {
+  height: 2.5rem;
+}
+.attrDeleteBtn img {
+  cursor: pointer;
+}
+
+.btn1 {
+  background-color: #888c97;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  cursor: not-allowed;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+.btn1:hover {
+  background-color: rgb(86.2780269058, 89.5964125561, 98.7219730942);
+  transition: background-color 0.3s ease;
 }
 
 /*# sourceMappingURL=styles.css.map */

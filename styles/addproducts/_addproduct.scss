@@ -1,0 +1,97 @@
+@use "../variables" as *;
+.attributes {
+  position: relative;
+
+  & legend {
+    padding: 0 1rem;
+    border: 1px solid #ccc;
+    background-color: $bg3;
+    font-size: 1.3rem;
+    margin: auto;
+  }
+}
+
+button[type="submit"] {
+  padding: 0.5rem 1rem;
+  background-color: $btnColor;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: lighten($btnColor, 9%);
+    transition: background-color 0.3s ease;
+  }
+}
+.hide {
+  display: none !important;
+}
+
+.attributeTable {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 5px;
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+
+  & thead {
+    background-color: $input;
+    border: 1px solid #ccc;
+  }
+  & tbody {
+    background-color: $bg;
+  }
+  & tr {
+    border: 1px solid #ccc;
+    transition: background-color 0.3s ease;
+
+    & th {
+      padding: 0.5rem;
+      border: none;
+      text-align: center;
+    }
+
+    & td {
+      padding: 0.5rem;
+      border: none;
+      text-align: center;
+
+      & input {
+        margin: auto;
+        width: 5rem;
+        height: 2rem;
+        padding: 0.2rem !important;
+        text-align: center;
+
+        &::placeholder {
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+.attrDeleteBtn {
+  height: 2.5rem;
+
+  & img {
+    cursor: pointer;
+  }
+}
+
+.btn1 {
+  background-color: $litetext;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  cursor: not-allowed;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($litetext, 20%);
+    transition: background-color 0.3s ease;
+  }
+}

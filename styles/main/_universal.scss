@@ -49,3 +49,18 @@
   border-right: 1px solid #ccc;
   background-color: $bg3;
 }
+
+.f-res2 {
+  display: flex;
+  
+  & > div,
+  & > section,
+  & > span {
+    flex: 1;
+  }
+}
+@media screen and (max-width: 1080px) {
+  .f-res2 {
+    flex-wrap: wrap;
+  }
+}

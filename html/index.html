@@ -15,8 +15,7 @@
     <link rel="stylesheet" href="https://surajit-singha-sisir.github.io/mastorsCDN/mastors.css">
     <script type="module" src="https://surajit-singha-sisir.github.io/mastorsCDN/mastors.js"></script>
     <script src="../scripts/fixedbar/navbar.js"></script>
-    <script src="../scripts/index/index.js"></script>
-    <script src="../scripts/zcorejs/scripts.js"></script>
+    <script src="../scripts/addproducts/addproduct.js"></script>
 </head>
 
 <body class="bg">
@@ -784,7 +783,6 @@
         </section>
     </nav>
     <!-- NAVBAR END -->
-
     <!-- MAIN START -->
     <main class="main bg" id="main">
         <!-- ADD PRODUCT START -->
@@ -794,18 +792,18 @@
             <aside class="span-2 relative">
 
                 <!-- TITLE -->
-                <section class="relative f f-col gap-10 v-space">
+                <section class="relative f-res f-col gap-10 v-space">
                     <label for="" class="star">Product Title</label>
                     <input type="text" name="" id="" placeholder="Type the title of the product">
                 </section>
 
                 <!-- CATEGORY -->
-                <fieldset class="b-e bg-3 f gap-10 w-100 pad--10 m-b--10">
-                    <legend class="thislegend">Category</legend>
+                <fieldset class="b-e bg-3 f-res gap-10 w-100 pad--10 m-b--10">
+                    <legend class="thislegend star">Category</legend>
 
                     <!-- CATEGORY -->
                     <div class="combo-box w-100">
-                        <input type="text" class="combo-input" placeholder="-- Select Category --">
+                        <input type="text" class="combo-input" placeholder="-- Category --">
                         <span class="chevron-icon"><img
                                 src="https://surajit-singha-sisir.github.io/mastorsCDN/Resources/svg/chevron.svg"
                                 alt=""></span>
@@ -828,7 +826,7 @@
                     <!-- SUB-CATEGORY -->
                     <div class="option">
                         <select>
-                            <option value="option0">-- Sub Category--</option>
+                            <option value="option0">-- Sub Cat--</option>
                             <option value="option1">Sub Cat 1</option>
                             <option value="option2">Sub Cat 2</option>
                             <option value="option3">Sub Cat 3</option>
@@ -838,7 +836,7 @@
                     <!-- SUB-SUB-CATEGORY -->
                     <div class="option">
                         <select>
-                            <option value="option0">-- Sub Sub Category --</option>
+                            <option value="option0">-- Sub Sub --</option>
                             <option value="option1">Sub Sub 1</option>
                             <option value="option2">Sub Sub 2</option>
                             <option value="option3">Sub Sub 3</option>
@@ -848,39 +846,135 @@
                 </fieldset>
 
                 <!-- PRICE -->
-                <fieldset class="b-e bg-3 f gap-10 w-100 pad--10 m-b--10">
-                    <legend class="thislegend">Product Pricing</legend>
+                <fieldset class="b-e bg-3 f-res gap-10 w-100 pad--10 m-b--10" id="productPrices">
+                    <legend class="thislegend star">Product Pricing</legend>
 
                     <!-- Buy Price -->
                     <div class="text-input" id="text-input">
-                        <label for="text">Buy Price</label>
-                        <input type="text" class="inputbox">
+                        <label for="productBuyPrice">Buy Price</label>
+                        <input type="number" class="inputbox" placeholder="" id="productBuyPrice">
                     </div>
 
                     <!-- Selling Price -->
                     <div class="text-input" id="text-input">
-                        <label for="text">Selling Price</label>
-                        <input type="text" class="inputbox">
+                        <label for="productSellingPrice">Selling Price</label>
+                        <input type="number" class="inputbox" id="productSellingPrice">
                     </div>
 
                     <!-- Discount Price -->
                     <div class="text-input" id="text-input">
-                        <label for="text">Discount Price</label>
-                        <input type="text" class="inputbox">
+                        <label for="productDiscountPrice">Discount Price</label>
+                        <input type="number" class="inputbox" id="productDiscountPrice">
                     </div>
 
                     <!-- UNIT -->
-                    <div class="option w--25i">
-                        <select class="bg-Currency currency">
-                            <option value="option1">৳ Taka</option>
-                            <option value="option2">$ Dollar</option>
-                            <option value="option3">₹ Rupee</option>
-                            <option value="option4">€ Euro</option>
-                            <option value="option4">£ Pound</option>
-                            <option value="option4">¥ Yuan</option>
+                    <div class="option">
+                        <select class="bg-Currency currency" id="productPricingCurrency">
+                            <option value="৳">৳ Taka</option>
+                            <option value="$">$ Dollar</option>
+                            <option value="₹">₹ Rupee</option>
+                            <option value="€">€ Euro</option>
+                            <option value="£">£ Pound</option>
+                            <option value="¥">¥ Yuan</option>
                         </select>
                     </div>
                 </fieldset>
+
+                <!-- STOCK -->
+                <section class="w-100 f f-just-center b-e pad--10 bg-3" id="productStock">
+                    <div class="f-res f-align-items-center f-just-center gap-10 w-80">
+                        <span class="f-0 text--m star">Stock</span>
+                        <div class="select-option-1">
+                            <input class="min-w--20" type="number" placeholder="Total Quantity">
+                            <div class="option">
+                                <select>
+                                    <option value="option1">Piece</option>
+                                    <option value="option2">Packet</option>
+                                    <option value="option3">Box</option>
+                                    <option value="option4">Carton</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ATTRIBUTES -->
+                <fieldset class="attributes w-100 f f-col f-just-center b-e pad--10 bg-3 m-tb--10">
+                    <legend>Atributes</legend>
+
+                    <!-- SELECT ATTRIBUTE -->
+                    <div class="pad--10 b-b-e m-b--10">
+                        <div class="combo-box">
+                            <input type="text" data-target="" id="attrInp" class="combo-input"
+                                placeholder="-- Select Atributes --">
+                            <span class="chevron-icon"><img
+                                    src="https://surajit-singha-sisir.github.io/mastorsCDN/Resources/svg/chevron.svg"
+                                    alt=""></span>
+                            <ul class="combo-options" id="attributeSelect" style="display: none;">
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- ATTRIBUTE VALUES -->
+                    <div class="b-e pad--10 f f-just-between f-align-items-center gap-10">
+                        <section class="f f-wrap gap-10" id="attributeValues">
+
+                        </section>
+                        <div class="relative w-100">
+                            <button id="addAttributeBtn" type="menu"
+                                class="pad-tb--03 pad-lr--08 plus b-none bg-hov-Purple cur-pointer text--m">+</button>
+
+                            <!-- ADD VALUE -->
+                            <div class="hide absolute b-e bg-2 f f-col gap-10 w--150 pad--10">
+                                <div class="combo-box">
+                                    <input type="text" class="combo-input" placeholder="-- Atributes --">
+                                    <span class="chevron-icon"><img
+                                            src="https://surajit-singha-sisir.github.io/mastorsCDN/Resources/svg/chevron.svg"
+                                            alt=""></span>
+                                    <ul class="combo-options" style="display: none;">
+                                        <li class="combo-option">Option 1</li>
+                                        <li class="combo-option">Option 2</li>
+                                        <li class="combo-option">Option 3</li>
+                                        <li class="combo-option">Option 4</li>
+                                        <li class="combo-option">Option 5</li>
+                                        <li class="combo-option">Option 6</li>
+                                        <li class="combo-option">Option 7</li>
+                                        <li class="combo-option">Option 8</li>
+                                        <li class="combo-option">Option 9</li>
+                                        <li class="combo-option">Option 10</li>
+                                        <li class="combo-option">Option 11</li>
+                                        <li class="combo-option">Option 12</li>
+                                        <li class="no-data" style="display: none;">No data found!</li>
+                                    </ul>
+                                </div>
+                                <div class="text-input">
+                                    <input type="text" placeholder="Variable Name">
+                                </div>
+                                <button type="submit">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ATTRIBUTE VALUES DETAILS -->
+                    <section class="b-e pad--10 m-t--10 hide" id="attributeSection">
+                        <table class="attributeTable">
+                            <thead>
+                                <tr>
+                                    <th>Size</th>
+                                    <th>Stock(Qty)</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </section>
+
+
+
+
+                    </section>
 
             </aside>
 
