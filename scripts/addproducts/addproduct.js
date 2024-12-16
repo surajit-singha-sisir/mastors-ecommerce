@@ -1,8 +1,9 @@
 print = console.log;
 window.addEventListener("load", () => {
   attribute();
+  addAttributeBtn();
   deleteTableRowInDeleteButton();
-  stockChecker();
+  addNewAttributeValue();
 });
 
 let jsonKeysAndValues = [];
@@ -32,6 +33,16 @@ document.addEventListener("DOMContentLoaded", function () {
         noData.textContent = "No Data Found";
         attributeSelect.appendChild(noData);
         noData.style.display = "none";
+
+        keys.forEach((key) => {
+          // SHOW ALL ATTRIBUTES FROM THE STORED JSON
+          const newValueAssigningOptions = document.getElementById(
+            "newValueAssigningOptions"
+          );
+          newValueAssigningOptions.innerHTML += `
+                <li class="combo-option valueAddingOptions">${key}</li>
+              `;
+        });
       }
     };
 
@@ -40,18 +51,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   loadAttribute();
 });
+
 function attribute() {
   const attris = document.querySelectorAll("#attributeSelect li");
   const attrInp = document.getElementById("attrInp");
   let selectedItem = attrInp.getAttribute("data-target");
-  const list = [];
-  const selectItems = [];
   const attributeValues = document.getElementById("attributeValues");
 
   // CHECK SELECTED ITEM
   attris.forEach((attr) => {
-    list.push(attr.textContent.trim());
-
     attr.addEventListener("click", () => {
       attrInp.setAttribute("data-target", attr.textContent.trim());
       selectedItem = attr.textContent.trim();
@@ -62,7 +70,7 @@ function attribute() {
       // ATTRIBUTE VALUES
       attributeValues.innerHTML = "";
       function values() {
-        jsonKeys.forEach((key, index) => {
+        jsonKeys.forEach((key) => {
           if (key === selectedItem) {
             const values = json[key];
 
@@ -120,6 +128,10 @@ function attribute() {
           const valueText = value.replace(/\s/g, "");
 
           if (checkbox.checked) {
+            // ADD THE ATTRUBUTE CAT NAME ON TH
+            const attributeCat = document.getElementById("attributeCat");
+            attributeCat.textContent = selectedItem;
+
             // NOT ACCEPT IF PRICE IS NIL
             const newPrice = calculatePrice();
             if (newPrice <= 0) {
@@ -133,7 +145,7 @@ function attribute() {
               // ADD ROW WITH UNIQUE IDENTIFIER
               const html = `<tr data-value="${valueText}">
                         <td>${value}</td>
-                        <td><input type="number" name="${valueText}" id="${valueText}" placeholder="Qty"></td>
+                        <td><input type="number" class="tableQty" name="${valueText}" id="${valueText}" min="1" placeholder="Qty"></td>
                         <td><button class="btn1" targer-price="${newPrice}">${currencySelect.value} ${newPrice}</button></td>
                         <td class="attrDeleteBtn"><img class="img-h-res" src="../resources/icons/delete.svg"></td>
                       </tr>`;
@@ -155,6 +167,55 @@ function attribute() {
               showToast("You must select at least one", "error");
             }
           }
+
+          // QUANTITY CHECKER
+          const stocks = document.getElementById("addProductTotalStock");
+          const totalStock = parseInt(stocks.value.trim());
+          function stockChecker() {
+            const qtys = document.querySelectorAll(".tableQty");
+
+            qtys.forEach((qty) => {
+              qty.addEventListener("change", () => {
+                let allQty = 0;
+
+                // TOTAL STOCK REMAIN REQUIRED DURING CHANGES
+                stocks.disabled = true;
+
+                qtys.forEach((input) => {
+                  allQty += parseFloat(input.value) || 0;
+                });
+
+                if (allQty < totalStock) {
+                  showToast(
+                    `Add More ${totalStock - allQty} pieces in Attribute`,
+                    "info"
+                  );
+                } else if (allQty === totalStock) {
+                  showToast(
+                    `Stock and Quantities are Equal. Thanks`,
+                    "success"
+                  );
+
+                  // TOTAL STOCK CAN CHANGE NOW
+                  stocks.disabled = false;
+                } else {
+                  showToast(
+                    `Stock is Exceeded. Reduce: ${allQty - totalStock} pieces`,
+                    "warning"
+                  );
+                }
+              });
+            });
+          }
+
+          if (!isNaN(totalStock) && totalStock > 0) {
+            stockChecker();
+          } else {
+            showToast(
+              "Please enter a valid Total Stock greater than 1",
+              "error"
+            );
+          }
         });
       });
 
@@ -167,6 +228,7 @@ function attribute() {
     });
   });
 }
+
 
 function deleteTableRowInDeleteButton() {
   const attributeTable = document.querySelector(".attributeTable tbody");
@@ -204,43 +266,56 @@ function deleteTableRowInDeleteButton() {
   });
 }
 
-function stockChecker() {
-  const totalStock = document.getElementById("addProductTotalStock").value;
-  console.log(totalStock);
-  
+function addAttributeBtn() {
+  const thePlusIcon = document.getElementById("addAttributeBtn");
+  thePlusIcon.onclick = function () {
+    // SHOW THE ATTRIBUTES AND VALUES
+    const newValueAssigning = document.getElementById("newValueAssigning");
+    newValueAssigning.classList.toggle("hide");
+  };
+}
 
-  // Target the table body for observation
-const attributeTable = document.querySelector(".attributeTable tbody");
+function addNewAttributeValue() {
+  const inputAttr = document.getElementById("newValueAssigningInput");
+  const addNewAttributeValue = document.getElementById("addNewAttributeValue");
+  const AttValue = document.getElementById("attributeValueOption");
 
-// Function to attach event listeners to quantity inputs
-function attachQuantityInputListener() {
-  const trs = attributeTable.querySelectorAll("tr");
-  trs.forEach((tr) => {
-    const quantityInput = tr.querySelector("td:nth-child(2) input[type=number]");
-    if (quantityInput && !quantityInput.dataset.listenerAttached) {
-      // Prevent multiple listeners on the same input
-      console.log(quantityInput);
-      quantityInput.dataset.listenerAttached = "true";
-      quantityInput.addEventListener("input", () => {
-        console.log(quantityInput.value);
+  function options() {
+    const options = document.querySelectorAll(".valueAddingOptions");
+
+    options.forEach((option) => {
+      option.addEventListener("click", () => {
+        // Update the data-target when an option is clicked
+        inputAttr.setAttribute("data-target", option.textContent);
+
+        // Check if selectedItem contains a valid value (not empty, undefined, or null)
+        const selectedItem = inputAttr.getAttribute("data-target");
+
+        AttValue.addEventListener("change", () => {
+          if (selectedItem && selectedItem !== "" && AttValue.value !== "") {
+            runXHR(selectedItem);
+          }
+        });
       });
-    }
-  });
-};
-
-// Create a mutation observer
-const observer = new MutationObserver((mutationsList) => {
-  for (const mutation of mutationsList) {
-    if (mutation.type === "childList") {
-      // Attach listeners when new rows are added
-      attachQuantityInputListener();
-    }
+    });
   }
-});
+  options();
 
-// Observe the table body for added rows
-observer.observe(attributeTable, { childList: true, subtree: false });
+  function runXHR(selectedItem) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://jsonplaceholder.typicode.com/posts", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
 
+    addNewAttributeValue.addEventListener("click", () => {
+      const AttValue = document.getElementById("attributeValueOption").value;
+      const data = JSON.stringify({
+        attribute: selectedItem,
+        value: AttValue,
+      });
+      // SEND TO SERVER
+      xhr.send(data);
+    });
+  }
 }
 
 // TOAST MESSAGE FUNCTION

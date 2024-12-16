@@ -885,7 +885,8 @@
                     <div class="f-res f-align-items-center f-just-center gap-10 w-80">
                         <span class="f-0 text--m star">Stock</span>
                         <div class="select-option-1">
-                            <input class="min-w--20" type="number" id="addProductTotalStock" placeholder="Total Quantity">
+                            <input class="min-w--20" type="number" id="addProductTotalStock"
+                                placeholder="Total Quantity">
                             <div class="option">
                                 <select>
                                     <option value="option1">Piece</option>
@@ -925,32 +926,23 @@
                                 class="pad-tb--03 pad-lr--08 plus b-none bg-hov-Purple cur-pointer text--m">+</button>
 
                             <!-- ADD VALUE -->
-                            <div class=" absolute hide b-e bg-2 f f-col gap-10 w--150 pad--10">
+                            <div id="newValueAssigning" class="absolute hide b-e bg-2 f f-col gap-10 w--150 pad--10">
                                 <div class="combo-box">
-                                    <input type="text" class="combo-input" placeholder="-- Atributes --">
-                                    <span class="chevron-icon"><img
-                                            src="https://surajit-singha-sisir.github.io/mastorsCDN/Resources/svg/chevron.svg"
-                                            alt=""></span>
-                                    <ul class="combo-options" style="display: none;">
-                                        <li class="combo-option">Option 1</li>
-                                        <li class="combo-option">Option 2</li>
-                                        <li class="combo-option">Option 3</li>
-                                        <li class="combo-option">Option 4</li>
-                                        <li class="combo-option">Option 5</li>
-                                        <li class="combo-option">Option 6</li>
-                                        <li class="combo-option">Option 7</li>
-                                        <li class="combo-option">Option 8</li>
-                                        <li class="combo-option">Option 9</li>
-                                        <li class="combo-option">Option 10</li>
-                                        <li class="combo-option">Option 11</li>
-                                        <li class="combo-option">Option 12</li>
+                                    <input type="text" id="newValueAssigningInput" class="combo-input" data-target=""
+                                        placeholder="-- Atributes --">
+                                    <span class="chevron-icon">
+                                        <img src="https://surajit-singha-sisir.github.io/mastorsCDN/Resources/svg/chevron.svg"
+                                            alt="">
+                                    </span>
+                                    <ul class="combo-options" id="newValueAssigningOptions" style="display: none;">
+
                                         <li class="no-data" style="display: none;">No data found!</li>
                                     </ul>
                                 </div>
                                 <div class="text-input">
-                                    <input type="text" placeholder="Variable Name">
+                                    <input type="text" id="attributeValueOption" placeholder="Variable Name">
                                 </div>
-                                <button type="submit">Submit</button>
+                                <button type="submit" id="addNewAttributeValue">Submit</button>
                             </div>
                         </div>
                     </div>
