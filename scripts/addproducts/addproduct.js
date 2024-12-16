@@ -1,6 +1,8 @@
 print = console.log;
 window.addEventListener("load", () => {
   attribute();
+  deleteTableRowInDeleteButton();
+  stockChecker();
 });
 
 let jsonKeysAndValues = [];
@@ -43,6 +45,7 @@ function attribute() {
   const attrInp = document.getElementById("attrInp");
   let selectedItem = attrInp.getAttribute("data-target");
   const list = [];
+  const selectItems = [];
   const attributeValues = document.getElementById("attributeValues");
 
   // CHECK SELECTED ITEM
@@ -165,6 +168,80 @@ function attribute() {
   });
 }
 
+function deleteTableRowInDeleteButton() {
+  const attributeTable = document.querySelector(".attributeTable tbody");
+  const attributeValues = document.getElementById("attributeValues");
+
+  // Delegate event listener to tbody for handling dynamic rows
+  attributeTable.addEventListener("click", function (e) {
+    // Check if the clicked element is inside an attrDeleteBtn cell
+    if (e.target.closest(".attrDeleteBtn")) {
+      const rowToRemove = e.target.closest("tr"); // Find the closest row
+      if (rowToRemove) {
+        const value = rowToRemove.getAttribute("data-value"); // Get the data-value attribute from the row
+
+        // Uncheck the associated checkbox
+        const associatedCheckbox = attributeValues.querySelector(
+          `.checkbox input[value="${value}"]`
+        );
+        if (associatedCheckbox) {
+          associatedCheckbox.checked = false;
+        }
+
+        // Remove the row
+        rowToRemove.remove();
+
+        // Check if any rows remain in the table
+        if (attributeTable.querySelectorAll("tr").length === 0) {
+          const attributeSection = document.getElementById("attributeSection");
+          if (attributeSection) {
+            attributeSection.classList.add("hide"); // Hide the attribute section if no rows remain
+          }
+          showToast("You must select at least one", "error"); // Display toast notification
+        }
+      }
+    }
+  });
+}
+
+function stockChecker() {
+  const totalStock = document.getElementById("addProductTotalStock").value;
+  console.log(totalStock);
+  
+
+  // Target the table body for observation
+const attributeTable = document.querySelector(".attributeTable tbody");
+
+// Function to attach event listeners to quantity inputs
+function attachQuantityInputListener() {
+  const trs = attributeTable.querySelectorAll("tr");
+  trs.forEach((tr) => {
+    const quantityInput = tr.querySelector("td:nth-child(2) input[type=number]");
+    if (quantityInput && !quantityInput.dataset.listenerAttached) {
+      // Prevent multiple listeners on the same input
+      console.log(quantityInput);
+      quantityInput.dataset.listenerAttached = "true";
+      quantityInput.addEventListener("input", () => {
+        console.log(quantityInput.value);
+      });
+    }
+  });
+};
+
+// Create a mutation observer
+const observer = new MutationObserver((mutationsList) => {
+  for (const mutation of mutationsList) {
+    if (mutation.type === "childList") {
+      // Attach listeners when new rows are added
+      attachQuantityInputListener();
+    }
+  }
+});
+
+// Observe the table body for added rows
+observer.observe(attributeTable, { childList: true, subtree: false });
+
+}
 
 // TOAST MESSAGE FUNCTION
 function showToast(message, type = "info") {
