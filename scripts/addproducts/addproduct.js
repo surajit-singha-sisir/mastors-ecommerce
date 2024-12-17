@@ -291,17 +291,20 @@ function addNewAttributeValue() {
 
         if (selectedItem === attList[i]) {
           const valueList = Object.values(jsonKeysAndValues[0][selectedItem]);
-
+          
+          // CHECK IF SELECTED VALUE IS ALREADY IN THE LIST
           AttValue.addEventListener("change", () => {
             if (selectedItem && selectedItem !== "" && AttValue.value !== "") {
-              for (const value of valueList) {
-                if (value !== AttValue.value) {
-                  runXHR(selectedItem);
-                  break;
-                } else {
-                  showToast("This Value is already in the list", "error");
-                  break;
-                }
+              const valueMatched = valueList.includes(AttValue.value);
+
+              if (valueMatched) {
+                showToast("This Value is already in the list", "error");
+              } else {
+                runXHR(selectedItem);
+                showToast(
+                  `${AttValue.value} has been added successfully`,
+                  "success"
+                );
               }
             }
           });
@@ -346,55 +349,4 @@ function addNewAttributeValue() {
     });
   }
 }
-// TOAST MESSAGE FUNCTION
-// function showToast(message, type = "info") {
-//   const duration = 3000; // Fixed timeout duration in milliseconds
-
-//   // Create a container for the toast if it doesn't exist
-//   let toastContainer = document.getElementById("toastContainer");
-//   if (!toastContainer) {
-//     toastContainer = document.createElement("div");
-//     toastContainer.id = "toastContainer";
-//     toastContainer.style.position = "fixed";
-//     toastContainer.style.bottom = "20px";
-//     toastContainer.style.right = "20px";
-//     toastContainer.style.zIndex = "9999";
-//     toastContainer.style.display = "flex";
-//     toastContainer.style.flexDirection = "column";
-//     toastContainer.style.gap = "10px";
-//     document.body.appendChild(toastContainer);
-//   }
-
-//   // Create the toast element
-//   const toast = document.createElement("div");
-//   toast.textContent = message;
-//   toast.style.padding = "10px 20px";
-//   toast.style.color = "#fff";
-//   toast.style.borderRadius = "5px";
-//   toast.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
-//   toast.style.transition = "opacity 0.5s";
-//   toast.style.opacity = "1";
-
-//   // Set background color based on the type
-//   if (type === "success") {
-//     toast.style.backgroundColor = "green";
-//   } else if (type === "error") {
-//     toast.style.backgroundColor = "red";
-//   } else if (type === "warning") {
-//     toast.style.backgroundColor = "orange";
-//   } else {
-//     toast.style.backgroundColor = "blue";
-//   }
-
-//   // Append the toast to the container
-//   toastContainer.appendChild(toast);
-
-//   // Remove the toast after the fixed duration
-//   setTimeout(() => {
-//     toast.style.opacity = "0";
-//     setTimeout(() => {
-//       toast.remove();
-//     }, 500); // Wait for the fade-out transition to complete
-//   }, duration);
-// }
-// "success" , "error" , "info" , "warning"
+// TOAST MESSAGE FUNCTION : "success" , "error" , "info" , "warning"
