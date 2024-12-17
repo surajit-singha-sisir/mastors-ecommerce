@@ -1,11 +1,9 @@
-print = console.log;
-
+import { showToast } from "https://surajit-singha-sisir.github.io/mastorsCDN/mastors.js";
 
 window.addEventListener("load", () => {
-  attribute();
   addAttributeBtn();
   deleteTableRowInDeleteButton();
-  addNewAttributeValue();
+  // addNewAttributeValue();
 });
 
 let jsonKeysAndValues = [];
@@ -23,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
         jsonKeysAndValues.push(data);
         const keys = Object.keys(data);
 
+        // Append dynamic <li> elements
         keys.forEach((key) => {
           const createLi = document.createElement("li");
           createLi.classList.add("combo-option");
@@ -30,15 +29,19 @@ document.addEventListener("DOMContentLoaded", function () {
           attributeSelect.appendChild(createLi);
         });
 
+        // Append newValueAssigningOptions
+        const newValueAssigningOptions = document.getElementById(
+          "newValueAssigningOptions"
+        );
         keys.forEach((key) => {
-          // SHOW ALL ATTRIBUTES FROM THE STORED JSON
-          const newValueAssigningOptions = document.getElementById(
-            "newValueAssigningOptions"
-          );
           newValueAssigningOptions.innerHTML += `
                 <li class="combo-option valueAddingOptions">${key}</li>
               `;
         });
+
+        // Call the `attribute` function after dynamically appending <li>
+        attribute();
+        addNewAttributeValue();
       }
     };
 
@@ -49,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function attribute() {
-  const attris = document.querySelectorAll("#attributeSelect li");
+  const attris = document.querySelectorAll(".attributeSelect li");
   const attrInp = document.getElementById("attrInp");
   let selectedItem = attrInp.getAttribute("data-target");
   const attributeValues = document.getElementById("attributeValues");
@@ -59,7 +62,6 @@ function attribute() {
     attr.addEventListener("click", () => {
       attrInp.setAttribute("data-target", attr.textContent.trim());
       selectedItem = attr.textContent.trim();
-      // console.log(selectedItem);
 
       const json = jsonKeysAndValues[0];
       const jsonKeys = Object.keys(json);
@@ -225,7 +227,6 @@ function attribute() {
     });
   });
 }
-
 function deleteTableRowInDeleteButton() {
   const attributeTable = document.querySelector(".attributeTable tbody");
   const attributeValues = document.getElementById("attributeValues");
@@ -279,7 +280,8 @@ function addNewAttributeValue() {
   function options() {
     const options = document.querySelectorAll(".valueAddingOptions");
 
-    options.forEach((option) => {
+    const attList = Object.keys(jsonKeysAndValues[0]);
+    options.forEach((option, i) => {
       option.addEventListener("click", () => {
         // Update the data-target when an option is clicked
         inputAttr.setAttribute("data-target", option.textContent.trim());
@@ -287,11 +289,23 @@ function addNewAttributeValue() {
         // Check if selectedItem contains a valid value (not empty, undefined, or null)
         const selectedItem = inputAttr.getAttribute("data-target");
 
-        AttValue.addEventListener("change", () => {
-          if (selectedItem && selectedItem !== "" && AttValue.value !== "") {
-            runXHR(selectedItem);
-          }
-        });
+        if (selectedItem === attList[i]) {
+          const valueList = Object.values(jsonKeysAndValues[0][selectedItem]);
+
+          AttValue.addEventListener("change", () => {
+            if (selectedItem && selectedItem !== "" && AttValue.value !== "") {
+              for (const value of valueList) {
+                if (value !== AttValue.value) {
+                  runXHR(selectedItem);
+                  break;
+                } else {
+                  showToast("This Value is already in the list", "error");
+                  break;
+                }
+              }
+            }
+          });
+        }
       });
     });
   }
@@ -302,67 +316,85 @@ function addNewAttributeValue() {
     xhr.open("POST", "https://jsonplaceholder.typicode.com/posts", true);
     xhr.setRequestHeader("Content-Type", "application/json");
 
+    xhr.onreadystatechange = () => {
+      // IF XHR SUCCESSFUL
+      if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 201) {
+        showToast(`Successfully Added ${selectedItem}`, "success");
+
+        // SHOW IN THE VALUE LIST
+        const attributeValues = document.getElementById("attributeValues");
+        const valueId = AttValue.value.replace(/\s/g, "");
+        const html = `<div class="checkbox"><input type="checkbox" id="${valueId}" value="${AttValue.value}"><label for="${valueId}">${AttValue.value}</label></div>`;
+        attributeValues.innerHTML += html;
+      }
+    };
+
     addNewAttributeValue.addEventListener("click", () => {
       const AttValue = document.getElementById("attributeValueOption").value;
-      const data = JSON.stringify({
-        attribute: selectedItem,
-        value: AttValue,
-      });
-      // SEND TO SERVER
-      xhr.send(data);
+
+      if (selectedItem && AttValue) {
+        const data = JSON.stringify({
+          attribute: selectedItem,
+          value: AttValue,
+        });
+
+        // SEND TO SERVER
+        xhr.send(data);
+      } else {
+        console.log("Selected item or attribute value is missing.");
+      }
     });
   }
 }
-
 // TOAST MESSAGE FUNCTION
-function showToast(message, type = "info") {
-  const duration = 3000; // Fixed timeout duration in milliseconds
+// function showToast(message, type = "info") {
+//   const duration = 3000; // Fixed timeout duration in milliseconds
 
-  // Create a container for the toast if it doesn't exist
-  let toastContainer = document.getElementById("toastContainer");
-  if (!toastContainer) {
-    toastContainer = document.createElement("div");
-    toastContainer.id = "toastContainer";
-    toastContainer.style.position = "fixed";
-    toastContainer.style.bottom = "20px";
-    toastContainer.style.right = "20px";
-    toastContainer.style.zIndex = "9999";
-    toastContainer.style.display = "flex";
-    toastContainer.style.flexDirection = "column";
-    toastContainer.style.gap = "10px";
-    document.body.appendChild(toastContainer);
-  }
+//   // Create a container for the toast if it doesn't exist
+//   let toastContainer = document.getElementById("toastContainer");
+//   if (!toastContainer) {
+//     toastContainer = document.createElement("div");
+//     toastContainer.id = "toastContainer";
+//     toastContainer.style.position = "fixed";
+//     toastContainer.style.bottom = "20px";
+//     toastContainer.style.right = "20px";
+//     toastContainer.style.zIndex = "9999";
+//     toastContainer.style.display = "flex";
+//     toastContainer.style.flexDirection = "column";
+//     toastContainer.style.gap = "10px";
+//     document.body.appendChild(toastContainer);
+//   }
 
-  // Create the toast element
-  const toast = document.createElement("div");
-  toast.textContent = message;
-  toast.style.padding = "10px 20px";
-  toast.style.color = "#fff";
-  toast.style.borderRadius = "5px";
-  toast.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
-  toast.style.transition = "opacity 0.5s";
-  toast.style.opacity = "1";
+//   // Create the toast element
+//   const toast = document.createElement("div");
+//   toast.textContent = message;
+//   toast.style.padding = "10px 20px";
+//   toast.style.color = "#fff";
+//   toast.style.borderRadius = "5px";
+//   toast.style.boxShadow = "0 2px 6px rgba(0,0,0,0.2)";
+//   toast.style.transition = "opacity 0.5s";
+//   toast.style.opacity = "1";
 
-  // Set background color based on the type
-  if (type === "success") {
-    toast.style.backgroundColor = "green";
-  } else if (type === "error") {
-    toast.style.backgroundColor = "red";
-  } else if (type === "warning") {
-    toast.style.backgroundColor = "orange";
-  } else {
-    toast.style.backgroundColor = "blue";
-  }
+//   // Set background color based on the type
+//   if (type === "success") {
+//     toast.style.backgroundColor = "green";
+//   } else if (type === "error") {
+//     toast.style.backgroundColor = "red";
+//   } else if (type === "warning") {
+//     toast.style.backgroundColor = "orange";
+//   } else {
+//     toast.style.backgroundColor = "blue";
+//   }
 
-  // Append the toast to the container
-  toastContainer.appendChild(toast);
+//   // Append the toast to the container
+//   toastContainer.appendChild(toast);
 
-  // Remove the toast after the fixed duration
-  setTimeout(() => {
-    toast.style.opacity = "0";
-    setTimeout(() => {
-      toast.remove();
-    }, 500); // Wait for the fade-out transition to complete
-  }, duration);
-}
+//   // Remove the toast after the fixed duration
+//   setTimeout(() => {
+//     toast.style.opacity = "0";
+//     setTimeout(() => {
+//       toast.remove();
+//     }, 500); // Wait for the fade-out transition to complete
+//   }, duration);
+// }
 // "success" , "error" , "info" , "warning"

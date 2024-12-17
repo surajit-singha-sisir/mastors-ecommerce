@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://surajit-singha-sisir.github.io/mastorsCDN/mastors.css">
     <script type="module" src="https://surajit-singha-sisir.github.io/mastorsCDN/mastors.js"></script>
     <script src="../scripts/fixedbar/navbar.js"></script>
-    <script src="../scripts/addproducts/addproduct.js"></script>
+    <script type="module" src="../scripts/addproducts/addproduct.js"></script>
 </head>
 
 <body class="bg">
@@ -929,22 +929,11 @@
                             <div class="Combo-inputbox">
                                 <input type="text" data-target="" id="attrInp" class="combo-input"
                                     placeholder="-- Select Atributes --" data-combo-id="combo1">
-                                <ul class="combo-options" id="attributeSelect" style="display: none;">
+                                <ul class="combo-options attributeSelect" id="attributeSelect" style="display: none;">
                                     <li class="no-data" style="display: none;">No data found!</li>
                                 </ul>
                             </div>
                         </div>
-
-
-
-                        <!-- <div class="combo-box">
-                                <input type="text" data-target="" id="attrInp" class="combo-input"
-                                    placeholder="-- Select Atributes --">
-                                <span class="chevron-icon"></span>
-                                <ul class="combo-options" id="attributeSelect" style="display: none;">
-                                    <li class="no-data" style="display: none;">No data found!</li>
-                                </ul>
-                            </div> -->
 
                         <!-- ATTRIBUTE VALUES -->
                         <div class="b-e pad--10 f f-just-between f-align-items-center gap-10">
@@ -958,8 +947,7 @@
                                 <!-- ADD VALUE -->
                                 <div id="newValueAssigning"
                                     class="absolute hide b-e bg-2 f f-col gap-10 w--150 pad--10">
-
-
+                                    <!-- COMBOBOX -->
                                     <div class="combo-box">
                                         <div class="Combo-inputbox">
                                             <input type="text" id="newValueAssigningInput" class="combo-input"
@@ -970,27 +958,11 @@
                                             </ul>
                                         </div>
                                     </div>
-
-
-
-                                    <!-- <div class="combo-box">
-                                        <input type="text" id="newValueAssigningInput" class="combo-input"
-                                            data-target="" placeholder="-- Atributes --">
-                                        <span class="chevron-icon">
-                                            <img src="https://surajit-singha-sisir.github.io/mastorsCDN/Resources/svg/chevron.svg"
-                                                alt="">
-                                        </span>
-                                        <ul class="combo-options" id="newValueAssigningOptions" style="display: none;">
-
-                                            <li class="no-data" style="display: none;">No data found!</li>
-                                        </ul>
-                                    </div> -->
-
-
-
+                                    <!-- INPUT VALUE -->
                                     <div class="text-input">
                                         <input type="text" id="attributeValueOption" placeholder="Variable Name">
                                     </div>
+                                    <!-- SUBMIT BUTTON -->
                                     <button type="submit" id="addNewAttributeValue">Submit</button>
                                 </div>
                             </div>
