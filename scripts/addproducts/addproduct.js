@@ -1,4 +1,6 @@
 print = console.log;
+
+
 window.addEventListener("load", () => {
   attribute();
   addAttributeBtn();
@@ -27,12 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
           createLi.textContent = key;
           attributeSelect.appendChild(createLi);
         });
-
-        const noData = document.createElement("li");
-        noData.classList.add("no-data");
-        noData.textContent = "No Data Found";
-        attributeSelect.appendChild(noData);
-        noData.style.display = "none";
 
         keys.forEach((key) => {
           // SHOW ALL ATTRIBUTES FROM THE STORED JSON
@@ -63,6 +59,7 @@ function attribute() {
     attr.addEventListener("click", () => {
       attrInp.setAttribute("data-target", attr.textContent.trim());
       selectedItem = attr.textContent.trim();
+      // console.log(selectedItem);
 
       const json = jsonKeysAndValues[0];
       const jsonKeys = Object.keys(json);
@@ -229,7 +226,6 @@ function attribute() {
   });
 }
 
-
 function deleteTableRowInDeleteButton() {
   const attributeTable = document.querySelector(".attributeTable tbody");
   const attributeValues = document.getElementById("attributeValues");
@@ -286,7 +282,7 @@ function addNewAttributeValue() {
     options.forEach((option) => {
       option.addEventListener("click", () => {
         // Update the data-target when an option is clicked
-        inputAttr.setAttribute("data-target", option.textContent);
+        inputAttr.setAttribute("data-target", option.textContent.trim());
 
         // Check if selectedItem contains a valid value (not empty, undefined, or null)
         const selectedItem = inputAttr.getAttribute("data-target");
