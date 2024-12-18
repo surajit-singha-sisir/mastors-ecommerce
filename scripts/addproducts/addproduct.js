@@ -352,7 +352,80 @@ function addNewAttributeValue() {
 
 class addTags {
   tags() {
-    console.log("asdas");
+    const tagContainer = document.getElementById("e-tags");
+    const inputBox = tagContainer.querySelector(".e-addTagInput");
+    const eTagList = tagContainer.querySelector(".e-tag-list");
+
+    inputBox.addEventListener("keydown", (event) => {
+      if (event.key === "Tab" || event.key === "Enter" || event.key === ",") {
+        event.preventDefault();
+        const tagValue = inputBox.value.trim();
+
+        if (tagValue) {
+          // CHECK DUPLICATION
+          if (this.tagChecker(tagValue, eTagList)) {
+            showToast("Tag already exists", "error");
+            return;
+          }
+          // CHECK SPECIAL CHARACTERS
+          else if (this.specialChars(tagValue)) {
+            showToast("Tag contains special characters", "error");
+            return;
+          }
+          // CHECK MINIMUM 3 CHARACTER INPUTVALUE
+          else if (tagValue.length < 3) {
+            showToast("Tag must be at least 3 characters long", "error");
+            return;
+          }
+
+          // ADD LI
+          const li = `<li>
+                          <p>${tagValue}</p>
+                          <i class="m-m-cross"></i>
+                      </li>`;
+          eTagList.innerHTML += li;
+
+          // EMPTY INPUT BOX
+          inputBox.value = "";
+        }
+      }
+    });
+
+    // TAG DELETE (Event Delegation) [FOR DYNAMIC DATA]
+    eTagList.addEventListener("click", (event) => {
+      if (event.target.classList.contains("m-m-cross")) {
+        event.target.parentElement.remove();
+      }
+      // CHECK TAGS NOT EMPTY
+      if (eTagList.childElementCount < 1) {
+        showToast("You must add minimum 5 tags", "warning");
+      }
+    });
+
+    // DOUBLE CLICK TO EDIT TAG
+    eTagList.addEventListener("dblclick", (e) => {
+      inputBox.value = e.target.textContent;
+      // REMOVE LI
+      e.target.parentElement.remove();
+      // CHECK TAGS NOT EMPTY
+      if (eTagList.childElementCount < 1) {
+        showToast("You must add minimum 5 tags", "warning");
+      }
+    });
+  }
+
+  // CHECK DUPLICATION
+  tagChecker(tagValue, eTagList) {
+    const tagList = Array.from(eTagList.querySelectorAll("li p"));
+    return tagList.some(
+      (tag) => tag.textContent.trim().toLowerCase() === tagValue.toLowerCase()
+    );
+  }
+
+  // CHECK SPECIAL CHARACTERS
+  specialChars(tagValue) {
+    const specialChars = /[^a-zA-Z0-9\s]/;
+    return specialChars.test(tagValue.toLowerCase());
   }
 }
 

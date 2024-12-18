@@ -525,6 +525,7 @@ button[type=submit]:hover {
 .e-tags .e-tag-list {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 .e-tags .e-tag-list li {
@@ -540,15 +541,14 @@ button[type=submit]:hover {
   padding: 0.3rem;
 }
 .e-tags .e-tag-list li p {
+  padding: 0 0.5rem;
   font-size: 1rem;
-  line-height: 0;
-  padding: 0.4rem;
 }
 .e-tags .e-tag-list li i {
   position: relative;
   font-size: 0.5rem;
-  padding: 0.4rem;
   margin-top: 0.1rem;
+  padding: 0.5rem;
   cursor: pointer;
   border-radius: 50%;
   background-color: rgb(12.125, 133.375, 97);
