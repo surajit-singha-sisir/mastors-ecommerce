@@ -61,6 +61,37 @@ a {
   background-color: #e8ebed;
 }
 
+.note-modal-backdrop {
+  display: none !important;
+  z-index: -1;
+}
+
+.note-modal {
+  position: fixed;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  padding: 20px;
+  border-radius: 5px;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+.note-modal-content {
+  width: 50%;
+  z-index: 5;
+  margin-top: 50%;
+}
+
+.note-btn-primary {
+  margin-right: 1rem !important;
+  margin-top: -1rem !important;
+}
+
 li {
   list-style: none;
 }
@@ -482,6 +513,62 @@ button[type=submit]:hover {
 .btn1:hover {
   background-color: rgb(86.2780269058, 89.5964125561, 98.7219730942);
   transition: background-color 0.3s ease;
+}
+
+.e-tags {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+.e-tags .e-tag-list {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.e-tags .e-tag-list li {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.3rem;
+  color: #fff;
+  text-align: center;
+  background-color: #0a6e50;
+  border-radius: 1rem;
+  padding: 0.3rem;
+}
+.e-tags .e-tag-list li p {
+  font-size: 1rem;
+  line-height: 0;
+  padding: 0.4rem;
+}
+.e-tags .e-tag-list li i {
+  position: relative;
+  font-size: 0.5rem;
+  padding: 0.4rem;
+  margin-top: 0.1rem;
+  cursor: pointer;
+  border-radius: 50%;
+  background-color: rgb(12.125, 133.375, 97);
+  transition: all 0.2s ease;
+}
+.e-tags .e-tag-list li i:hover {
+  background-color: rgb(7.875, 86.625, 63);
+  transition: all 0.2s ease;
+}
+.e-tags .e-tag-list li i:hover::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgb(16.375, 180.125, 131);
+  width: 1.4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  transition: all 0.2s ease;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -12,10 +12,25 @@
     <link
         href="https://fonts.googleapis.com/css2?family=K2D:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&family=Noto+Emoji:wght@300..700&display=swap"
         rel="stylesheet">
+
+    <!-- MASTORSCDN -->
     <link rel="stylesheet" href="https://surajit-singha-sisir.github.io/mastorsCDN/mastors.css">
+    <link rel="stylesheet" href="https://surajit-singha-sisir.github.io/mastorsCDN/mastorsIcons/mastorsIcons.css">
     <script type="module" src="https://surajit-singha-sisir.github.io/mastorsCDN/mastors.js"></script>
     <script src="../scripts/fixedbar/navbar.js"></script>
     <script type="module" src="../scripts/addproducts/addproduct.js"></script>
+
+
+    <!-- MULTI COMBOBOX -->
+    <script type="module" src="../scripts/addproducts/multicombo.js"></script>
+
+
+    <!-- SUMMERNOTE -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.9.0/dist/summernote-lite.min.js"></script>
 </head>
 
 <body class="bg">
@@ -789,7 +804,7 @@
         <div class="product add-product g-res-3-col-container gap-10">
 
             <!-- LEFT COLUMN -->
-            <aside class="span-2 relative">
+            <aside class="span-3 relative">
 
                 <!-- TITLE -->
                 <section class="relative f-res f-col gap-10 v-space">
@@ -984,13 +999,57 @@
                             </table>
                         </section>
 
+                    </div>
+                </fieldset>
 
+                <!-- TEXT EDITOR -->
+                <section class="summernote">
+                    <span class="text--m star">Description</span><br><br>
+                    <textarea class="summernote" name="" id="summernote"></textarea>
+                    <script>
+                        $('#summernote').summernote({
+                            placeholder: '1. Introduction <br><br> 2. Describe your product<br><br> <i>Add your product Images and Text Sizes to get Notice</i>',
+                            tabsize: 2,
+                            height: 200,
+                            toolbar: [
+                                ['style', ['style']],
+                                ['font', ['bold', 'underline', 'clear']],
+                                // ['color', ['color']],
+                                ['para', ['ul', 'ol', 'paragraph']],
+                                ['table', ['table']],
+                                ['insert', ['link', 'picture', 'video']],
+                                ['view', ['codeview']]
+                            ]
+                        });
+                    </script>
+                </section>
 
-
-                        </section>
-
+                <!-- TAGS -->
+                <section class="e-tags" id="e-tags">
+                    <span class="text--m star">Tags</span>
+                    <ul class="e-tag-list">
+                        <li>
+                            <p>Bottle</p>
+                            <i class="m-m-cross"></i>
+                        </li>
+                        <li>
+                            <p>Plastic</p>
+                            <i class="m-m-cross"></i>
+                        </li>
+                        <li>
+                            <p>1 Litre</p>
+                            <i class="m-m-cross"></i>
+                        </li>
+                        <li>
+                            <p>Durable</p>
+                            <i class="m-m-cross"></i>
+                        </li>
+                    </ul>
+                    <div class="addTagInputDiv">
+                        <input type="text" id="addTag" placeholder="Add a new tag">
+                    </div>
+                </section>
             </aside>
-
 
             <!-- RIGHT COLUMN -->
             <aside class="span-1">

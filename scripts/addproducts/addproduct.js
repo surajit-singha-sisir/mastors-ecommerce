@@ -291,7 +291,7 @@ function addNewAttributeValue() {
 
         if (selectedItem === attList[i]) {
           const valueList = Object.values(jsonKeysAndValues[0][selectedItem]);
-          
+
           // CHECK IF SELECTED VALUE IS ALREADY IN THE LIST
           AttValue.addEventListener("change", () => {
             if (selectedItem && selectedItem !== "" && AttValue.value !== "") {
@@ -349,4 +349,16 @@ function addNewAttributeValue() {
     });
   }
 }
+
+class addTags {
+  tags() {
+    console.log("asdas");
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const tag = new addTags();
+  tag.tags();
+});
+
 // TOAST MESSAGE FUNCTION : "success" , "error" , "info" , "warning"

@@ -4,113 +4,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reusable Combo Box</title>
+    <title>Custom Dropdown</title>
+    <style>
+        /* Basic styles for the combo box */
+        .combo {
+            position: relative;
+            width: 200px;
+            font-family: Arial, sans-serif;
+        }
 
-    <!-- <link rel="stylesheet" href="https://surajit-singha-sisir.github.io/mastorsCDN/mastors.css"> -->
-    <link rel="stylesheet" href="../styles.css">
+        .combo-value {
+            padding: 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background-color: #fff;
+        }
+
+        .combo.open .combo-value {
+            border-radius: 4px 4px 0 0;
+        }
+
+        .combo .combo-value:focus {
+            outline: 2px solid #007bff;
+        }
+
+        .combo-listbox {
+            position: absolute;
+            width: 100%;
+            max-height: 150px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            display: none;
+            z-index: 10;
+        }
+
+        .combo.open .combo-listbox {
+            display: block;
+        }
+
+        .combo-option {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+        }
+
+        .combo-option:hover,
+        .combo-option.option-current {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
-
-    <div class="combo-box">
-        <div class="Combo-inputbox"><input type="text" class="combo-input b-Blue b-1 b-rad--05"
-                placeholder="Select another option..." data-combo-id="combo2"></div>
-        <ul class="combo-options" id="comboOptions1">
-            <li class="combo-option">List 1</li>
-            <li class="combo-option">List 2</li>
-            <li class="combo-option">List 3</li>
-            <li class="combo-option">List 4</li>
-            <li class="combo-option">List 5</li>
-            <li class="combo-option">List 1</li>
-            <li class="combo-option">List 2</li>
-            <li class="combo-option">List 3</li>
-            <li class="combo-option">List 4</li>
-            <li class="combo-option">List 5</li>
-            <li class="no-data" style="display: none;">No data found!</li>
-        </ul>
-    </div>
-
-    <div class="combo-box">
-        <div class="Combo-inputbox"><input type="text" class="combo-input b-Blue b-1 b-rad--05"
-                placeholder="Select another option..." data-combo-id="combo2"></div>
-        <ul class="combo-options">
-            <li class="combo-option">Apple</li>
-            <li class="combo-option">Banana</li>
-            <li class="combo-option">Orange</li>
-            <li class="combo-option">Grapes</li>
-            <li class="combo-option">Pineapple</li>
-            <li class="no-data" style="display: none;">No data found!</li>
-        </ul>
+    <div class="combo" role="combobox" aria-expanded="false">
+        <div class="combo-value" tabindex="0">Select an option</div>
+        <div class="combo-listbox" role="listbox">
+            <!-- Options populated dynamically by JS -->
+        </div>
     </div>
 
     <script>
+        // JavaScript to make the dropdown functional
+        document.addEventListener("DOMContentLoaded", () => {
+            const combo = document.querySelector(".combo");
+            const comboValue = combo.querySelector(".combo-value");
+            const comboListbox = combo.querySelector(".combo-listbox");
 
+            const options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"];
 
-        window.addEventListener("load", () => {
-            // INITIALIZE ALL COMBO BOXES
-            const comboBoxes = document.querySelectorAll('.combo-box');
+            // Populate the dropdown options
+            options.forEach((option, index) => {
+                const optionElement = document.createElement("div");
+                optionElement.classList.add("combo-option");
+                optionElement.setAttribute("role", "option");
+                optionElement.setAttribute("data-value", option);
+                optionElement.textContent = option;
+                comboListbox.appendChild(optionElement);
 
-            comboBoxes.forEach((comboBox) => {
-                const comboInput = comboBox.querySelector('.combo-input');
-                const comboOptions = comboBox.querySelector('.combo-options');
-                const noData = comboOptions.querySelector('.no-data');
-                const comboOptionItems = comboOptions.querySelectorAll('.combo-option');
-                const inputBox = comboBox.querySelector('.Combo-inputbox'); // FOR CHEVRON ROTATION
-
-                // SHOW DROPDOWN ON FOCUS
-                comboInput.addEventListener("focus", () => {
-                    comboOptions.style.display = "block";
-                    inputBox.classList.add('open'); // ROTATE CHEVRON
+                // Click event for selecting an option
+                optionElement.addEventListener("click", () => {
+                    comboValue.textContent = option;
+                    combo.setAttribute("aria-expanded", "false");
+                    combo.classList.remove("open");
                 });
 
-                // HIDE DROPDOWN ON OUTSIDE CLICK
-                document.addEventListener("click", (e) => {
-                    if (!e.target.closest('.combo-box')) {
-                        comboOptions.style.display = "none";
-                        inputBox.classList.remove('open'); // RESET CHEVRON
-                    }
-                });
-
-                // FILTER OPTIONS AS USER TYPES
-                comboInput.addEventListener("input", () => {
-                    const inputValue = comboInput.value.toLowerCase();
-                    let found = false;
-
-                    comboOptionItems.forEach((item) => {
-                        if (item.textContent.toLowerCase().includes(inputValue)) {
-                            item.style.display = "block";
-                            found = true;
-                        } else {
-                            item.style.display = "none";
-                        }
+                // Keyboard navigation for the options
+                optionElement.addEventListener("mouseenter", () => {
+                    document.querySelectorAll(".combo-option").forEach((opt) => {
+                        opt.classList.remove("option-current");
                     });
-
-                    // SHOW "NO DATA FOUND" MESSAGE IF NO MATCHES
-                    noData.style.display = found ? "none" : "block";
-                });
-
-                // HANDLE OPTION SELECTION
-                comboOptionItems.forEach((item) => {
-                    item.addEventListener("click", () => {
-                        comboInput.value = item.textContent;
-                        comboOptions.style.display = "none";
-                        inputBox.classList.remove('open'); // RESET CHEVRON
-                    });
-                });
-
-                // CLEAR INPUT ON ESC KEY
-                comboInput.addEventListener("keydown", (e) => {
-                    if (e.key === "Escape") {
-                        comboInput.value = "";
-                        comboOptions.style.display = "none";
-                        inputBox.classList.remove('open'); // RESET CHEVRON
-                    }
+                    optionElement.classList.add("option-current");
                 });
             });
+
+            // Toggle dropdown on click
+            comboValue.addEventListener("click", () => {
+                const isOpen = combo.classList.toggle("open");
+                combo.setAttribute("aria-expanded", isOpen.toString());
+            });
+
+            // Handle keyboard interactions
+            comboValue.addEventListener("keydown", (e) => {
+                const current = comboListbox.querySelector(".option-current");
+                const allOptions = Array.from(comboListbox.querySelectorAll(".combo-option"));
+                let index = current ? allOptions.indexOf(current) : -1;
+
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    index = (index + 1) % allOptions.length;
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    index = (index - 1 + allOptions.length) % allOptions.length;
+                } else if (e.key === "Enter" && current) {
+                    e.preventDefault();
+                    current.click();
+                } else if (e.key === "Escape") {
+                    combo.classList.remove("open");
+                    combo.setAttribute("aria-expanded", "false");
+                }
+
+                if (index >= 0) {
+                    allOptions.forEach((opt) => opt.classList.remove("option-current"));
+                    allOptions[index].classList.add("option-current");
+                    allOptions[index].scrollIntoView({ block: "nearest" });
+                }
+            });
+
+            // Close dropdown on outside click
+            document.addEventListener("click", (e) => {
+                if (!combo.contains(e.target)) {
+                    combo.classList.remove("open");
+                    combo.setAttribute("aria-expanded", "false");
+                }
+            });
         });
-
     </script>
-
 </body>
 
 </html>
