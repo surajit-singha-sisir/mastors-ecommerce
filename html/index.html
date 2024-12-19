@@ -943,7 +943,7 @@
                         <div class="combo-box">
                             <div class="Combo-inputbox">
                                 <input type="text" data-target="" id="attrInp" class="combo-input"
-                                    placeholder="-- Select Atributes --" data-combo-id="combo1">
+                                    placeholder="-- Select Atributes --" data-combo-id="combo1" autocomplete="off">
                                 <ul class="combo-options attributeSelect" id="attributeSelect" style="display: none;">
                                     <li class="no-data" style="display: none;">No data found!</li>
                                 </ul>
@@ -1029,26 +1029,33 @@
                     <span class="text--m star">Tags</span>
                     <ul class="e-tag-list">
                         <!-- DYNAMICLLY ADD DATA -->
-                        <li>
+                        <!-- <li>
                             <p>Bottle</p>
                             <i class="m-m-cross"></i>
-                        </li>
-                        <li>
-                            <p>Plastic</p>
-                            <i class="m-m-cross"></i>
-                        </li>
-                        <li>
-                            <p>1 Litre</p>
-                            <i class="m-m-cross"></i>
-                        </li>
-                        <li>
-                            <p>Durable</p>
-                            <i class="m-m-cross"></i>
-                        </li>
+                        </li> -->
                     </ul>
                     <!-- INPUT BOX -->
                     <input type="text" class="e-addTagInput" placeholder="Add a new tag">
 
+                </section>
+
+                <!-- FAQ -->
+                <section class="e-faqs" id="faqContainer">
+                    <span class="text--m star">Frequently Ask Questions (FAQ)</span>
+                    <div class="e-faqInputs" id="e-faqInputs">
+                        <!-- INPUT BOXS -->
+                        <input type="text" class="e-questionInput" id="e-questionInput" placeholder="Question">
+                        <textarea name="" id="e-answerInput" class="e-answerInput" placeholder="Answer"></textarea>
+                        <!-- ADD BUTTON -->
+                        <button class="btn btn-primary w--100 m-auto" id="faqAddBtn">Add</button>
+                    </div>
+                    <div class="e-faq-preview hide" id="e-faq-preview">
+                        <!-- PREVIEW -->
+                        <span class="text--m b darkBlue">FAQ Preview</span>
+                        <div class="e-faq-preview-box">
+                            <!-- DYNAMICLLY ADD DATA -->
+                        </div>
+                    </div>
                 </section>
             </aside>
 

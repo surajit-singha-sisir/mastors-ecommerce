@@ -524,13 +524,11 @@ button[type=submit]:hover {
 }
 .e-tags .e-tag-list {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
 }
 .e-tags .e-tag-list li {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 0.3rem;
@@ -556,7 +554,6 @@ button[type=submit]:hover {
 }
 .e-tags .e-tag-list li i:hover {
   background-color: rgb(7.875, 86.625, 63);
-  transition: all 0.2s ease;
 }
 .e-tags .e-tag-list li i:hover::after {
   content: "";
@@ -568,7 +565,146 @@ button[type=submit]:hover {
   width: 1.4rem;
   aspect-ratio: 1;
   border-radius: 50%;
-  transition: all 0.2s ease;
+}
+
+.e-faqs {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #e8ebed;
+  border-radius: 0.5rem;
+  margin-top: 1rem;
+  border: 1px solid #d4d8dc;
+  transition: all 0.3s ease;
+}
+.e-faqs .e-faqInputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.e-faqs .e-faqInputs textarea {
+  padding: 0.5rem;
+  border: 1px solid #d4d8dc;
+  border-radius: 5px;
+  resize: vertical;
+  padding: 10px 1.5rem;
+  font-family: "Arial", sans-serif;
+  min-height: 5rem;
+  max-height: 10rem;
+}
+.e-faqs .e-faqInputs textarea::placeholder {
+  font-size: 0.9rem;
+  color: #929292;
+}
+.e-faqs .e-faqInputs textarea:focus {
+  box-shadow: #d2e2fb 0px 0px 0px 2px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+.e-faqs .e-faq-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #f0f7fa;
+  border-radius: 0.5rem;
+  border: 1px solid #d4d8dc;
+  height: auto;
+  padding: 1rem;
+  transition: all 0.3s ease;
+}
+.e-faqs .e-faq-preview .e-faq-preview-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+  padding: 0.5rem;
+  border-radius: 0.3rem;
+  border: 1px solid #d4d8dc;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .e-faq-counter {
+  position: absolute;
+  top: 0;
+  right: 1.5rem;
+  font-style: italic;
+  color: #8b8b8b;
+  margin-top: -0.5rem;
+  z-index: 5;
+  transition: all 0.3s ease;
+}
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .e-faq-counter::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -47%);
+  width: 2.2rem;
+  aspect-ratio: 1;
+  border: 1px solid #d4d8dc;
+  border-radius: 50%;
+  z-index: -1;
+}
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .e-faq-counter::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -46%);
+  width: 1.8rem;
+  aspect-ratio: 1;
+  background-color: #e8ebed;
+  border-radius: 50%;
+  z-index: -1;
+}
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .e-faq-counter:hover {
+  font-style: normal;
+  color: #3b3b3b;
+  transition: all 0.3s ease;
+}
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .e-faq-counter:hover::before {
+  border: 1px solid rgb(183.8846153846, 190.5, 197.1153846154);
+}
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .e-faq-counter:hover::after {
+  background-color: rgb(217.6951219512, 222.5609756098, 225.8048780488);
+}
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .e-faq-content {
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .added-question {
+  font-size: 1.2rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #d4d8dc;
+  transition: all 0.3s ease;
+}
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .added-answer {
+  padding: 0.5rem 0;
+  transition: all 0.3s ease;
+}
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .m-compose,
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .m-bin {
+  color: #0a6e50;
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .m-compose:hover,
+.e-faqs .e-faq-preview .e-faq-preview-box .added-faq .m-bin:hover {
+  color: #0a286e;
+  transition: all 0.3s ease;
 }
 
 /*# sourceMappingURL=styles.css.map */

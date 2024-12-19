@@ -4,143 +4,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Custom Dropdown</title>
+    <title>Draggable Images</title>
+
+    <!-- MASTORSCDN -->
+    <link rel="stylesheet" href="https://surajit-singha-sisir.github.io/mastorsCDN/mastors.css">
+    <link rel="stylesheet" href="https://surajit-singha-sisir.github.io/mastorsCDN/mastorsIcons/mastorsIcons.css">
+    <script type="module" src="https://surajit-singha-sisir.github.io/mastorsCDN/mastors.js"></script>
     <style>
-        /* Basic styles for the combo box */
-        .combo {
+        .dragable-image-container {
             position: relative;
-            width: 200px;
-            font-family: Arial, sans-serif;
+            display: flex;
+            padding: 1rem;
+        }
+        .draggable {
+            width: 100px;
+            height: auto;
+            cursor: grab;
+            transition: all 0.3s ease;
         }
 
-        .combo-value {
-            padding: 10px;
-            border: 1px solid #ccc;
-            cursor: pointer;
-            background-color: #fff;
+        .draggable.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+            transform: scale(1.1);
+            transition: all 0.2s ease;
         }
 
-        .combo.open .combo-value {
-            border-radius: 4px 4px 0 0;
+        .preview-img-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 500px;
+            border: 1px solid #e9e9e9;
+            transition: all 0.3s ease;
         }
 
-        .combo .combo-value:focus {
-            outline: 2px solid #007bff;
-        }
-
-        .combo-listbox {
-            position: absolute;
+        .preview-img-container img {
             width: 100%;
-            max-height: 150px;
-            overflow-y: auto;
-            border: 1px solid #ccc;
-            background-color: #fff;
-            display: none;
-            z-index: 10;
+            aspect-ratio: 1;
+            object-fit: cover;
+            object-position: center;
         }
 
-        .combo.open .combo-listbox {
-            display: block;
+        .preview-img-container.scaling {
+            transform: scale(1.1);
+            transition: all 0.2s ease;
         }
 
-        .combo-option {
-            padding: 10px;
-            cursor: pointer;
-            background-color: #fff;
+        .dragging-item-counter {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5rem;
+            color: #dde6e9;
+            text-shadow: 2px 3px 3px #747474;
         }
 
-        .combo-option:hover,
-        .combo-option.option-current {
-            background-color: #007bff;
-            color: #fff;
+        @media screen and (max-width: 1080px) {
+            .dragging-item-counter {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media screen and (max-width: 420px) {
+            .dragging-item-counter {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 
-<body>
-    <div class="combo" role="combobox" aria-expanded="false">
-        <div class="combo-value" tabindex="0">Select an option</div>
-        <div class="combo-listbox" role="listbox">
-            <!-- Options populated dynamically by JS -->
-        </div>
+<body class="bg-Black">
+    <div class="dragable-image-container">
+        <span class="preview-img-container">
+            <img src="https://img.freepik.com/free-photo/organic-cosmetic-product-with-dreamy-aesthetic-fresh-background_23-2151382816.jpg"
+                class="draggable" draggable="true">
+        </span>
+        <span class="preview-img-container">
+            <img src="https://img.freepik.com/premium-photo/ultra-realistic-orange-background-4k-hd-photo-product_1193781-21514.jpg"
+                class="draggable" draggable="true">
+        </span>
+        <span class="preview-img-container">
+            <img src="https://img.freepik.com/free-photo/3d-beauty-product-studio_23-2151401472.jpg" class="draggable"
+                draggable="true">
+        </span>
+        <span class="preview-img-container">
+            <img src="https://cdn.pixabay.com/photo/2022/03/17/04/57/cosmetic-products-7073743_640.jpg"
+                class="draggable" draggable="true">
+        </span>
+        <span class="preview-img-container">
+            <img src="https://img.freepik.com/free-photo/3d-cartoon-beauty-products_23-2151503319.jpg" class="draggable"
+                draggable="true">
+        </span>
     </div>
 
     <script>
-        // JavaScript to make the dropdown functional
-        document.addEventListener("DOMContentLoaded", () => {
-            const combo = document.querySelector(".combo");
-            const comboValue = combo.querySelector(".combo-value");
-            const comboListbox = combo.querySelector(".combo-listbox");
+        // ALLOW DROPPING BY PREVENTING DEFAULT BEHAVIOR
+        function allowDrop(event) {
+            event.preventDefault();
+        }
 
-            const options = ["Option 1", "Option 2", "Option 3", "Option 4", "Option 5"];
+        // HANDLE DRAG START, SET DRAGGED IMAGE AND APPLY DRAGGING CLASS
+        function drag(event) {
+            event.dataTransfer.setData("text/plain", event.target.src);
+            event.target.classList.add("dragging");
 
-            // Populate the dropdown options
-            options.forEach((option, index) => {
-                const optionElement = document.createElement("div");
-                optionElement.classList.add("combo-option");
-                optionElement.setAttribute("role", "option");
-                optionElement.setAttribute("data-value", option);
-                optionElement.textContent = option;
-                comboListbox.appendChild(optionElement);
-
-                // Click event for selecting an option
-                optionElement.addEventListener("click", () => {
-                    comboValue.textContent = option;
-                    combo.setAttribute("aria-expanded", "false");
-                    combo.classList.remove("open");
-                });
-
-                // Keyboard navigation for the options
-                optionElement.addEventListener("mouseenter", () => {
-                    document.querySelectorAll(".combo-option").forEach((opt) => {
-                        opt.classList.remove("option-current");
-                    });
-                    optionElement.classList.add("option-current");
-                });
-            });
-
-            // Toggle dropdown on click
-            comboValue.addEventListener("click", () => {
-                const isOpen = combo.classList.toggle("open");
-                combo.setAttribute("aria-expanded", isOpen.toString());
-            });
-
-            // Handle keyboard interactions
-            comboValue.addEventListener("keydown", (e) => {
-                const current = comboListbox.querySelector(".option-current");
-                const allOptions = Array.from(comboListbox.querySelectorAll(".combo-option"));
-                let index = current ? allOptions.indexOf(current) : -1;
-
-                if (e.key === "ArrowDown") {
-                    e.preventDefault();
-                    index = (index + 1) % allOptions.length;
-                } else if (e.key === "ArrowUp") {
-                    e.preventDefault();
-                    index = (index - 1 + allOptions.length) % allOptions.length;
-                } else if (e.key === "Enter" && current) {
-                    e.preventDefault();
-                    current.click();
-                } else if (e.key === "Escape") {
-                    combo.classList.remove("open");
-                    combo.setAttribute("aria-expanded", "false");
+            // Update counters for all containers
+            document.querySelectorAll('.preview-img-container').forEach((container, index) => {
+                let counter = container.querySelector('.dragging-item-counter');
+                if (!counter) {
+                    counter = document.createElement('span');
+                    counter.className = 'dragging-item-counter';
+                    container.appendChild(counter);
                 }
-
-                if (index >= 0) {
-                    allOptions.forEach((opt) => opt.classList.remove("option-current"));
-                    allOptions[index].classList.add("option-current");
-                    allOptions[index].scrollIntoView({ block: "nearest" });
-                }
+                counter.textContent = index + 1;
+                counter.style.pointerEvents = "none";
             });
+        }
 
-            // Close dropdown on outside click
-            document.addEventListener("click", (e) => {
-                if (!combo.contains(e.target)) {
-                    combo.classList.remove("open");
-                    combo.setAttribute("aria-expanded", "false");
-                }
-            });
+        // HANDLE IMAGE DROP INTO VALID CONTAINERS
+        function drop(event) {
+            event.preventDefault();
+
+            const draggedImageSrc = event.dataTransfer.getData("text/plain");
+            const draggedImage = document.querySelector(`img[src="${draggedImageSrc}"]`);
+
+            let target = event.target;
+
+            // ENSURE TARGET IS A VALID DROP CONTAINER
+            if (target.tagName === "IMG") {
+                target = target.parentElement;
+            }
+
+            if (target.classList.contains("preview-img-container")) {
+                const targetImage = target.querySelector("img");
+                const draggedParent = draggedImage.parentElement;
+
+                target.classList.add("scaling");
+
+                setTimeout(() => {
+                    target.classList.remove("scaling");
+
+                    if (targetImage) {
+                        draggedParent.appendChild(targetImage);
+                    }
+                    target.appendChild(draggedImage);
+
+                    document.querySelectorAll('.dragging-item-counter').forEach(counter => counter.remove());
+                }, 100);
+            }
+
+            // REMOVE DRAGGING CLASS AFTER DROP
+            draggedImage.classList.remove("dragging");
+        }
+
+        // REMOVE DRAGGING CLASS IF DRAG OPERATION ENDS WITHOUT DROP
+        function dragEnd(event) {
+            event.target.classList.remove("dragging");
+            document.querySelectorAll('.dragging-item-counter').forEach(counter => counter.remove());
+        }
+
+        // ADD EVENT LISTENERS TO ALL ELEMENTS
+        document.querySelectorAll('.preview-img-container').forEach(container => {
+            container.addEventListener('dragover', allowDrop);
+            container.addEventListener('drop', drop);
         });
+
+        document.querySelectorAll('.draggable').forEach(img => {
+            img.addEventListener('dragstart', drag);
+            img.addEventListener('dragend', dragEnd);
+        });
+
     </script>
+
 </body>
 
 </html>
