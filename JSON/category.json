@@ -1,0 +1,62 @@
+[
+  {
+    "category": "Electronics",
+    "subcat": [
+      {
+        "name": "Mobile Phones",
+        "subsubcat": ["Smartphones", "Feature Phones"]
+      },
+      {
+        "name": "Computers",
+        "subsubcat": ["Desktops", "Monitors", "Components"]
+      },
+      {
+        "name": "Laptops",
+        "subsubcat": ["Gaming Laptops", "Ultrabooks", "Notebooks"]
+      },
+      {
+        "name": "Tablets",
+        "subsubcat": ["Android Tablets", "iPads", "Windows Tablets"]
+      },
+      {
+        "name": "Accessories",
+        "subsubcat": ["Chargers", "Cables", "Headphones"]
+      }
+    ]
+  },
+  {
+    "category": "Home Appliances",
+    "subcat": [
+      {
+        "name": "Kitchen Appliances",
+        "subsubcat": ["Refrigerators", "Microwaves", "Ovens"]
+      },
+      {
+        "name": "Laundry Appliances",
+        "subsubcat": ["Washing Machines", "Dryers", "Ironing"]
+      },
+      {
+        "name": "Cleaning Appliances",
+        "subsubcat": ["Vacuum Cleaners", "Steam Cleaners", "Air Purifiers"]
+      }
+    ]
+  },
+  {
+    "category": "Fashion",
+    "subcat": [
+      {
+        "name": "Men",
+        "subsubcat": ["Clothing", "Footwear", "Accessories"]
+      },
+
+      {
+        "name": "Women",
+        "subsubcat": ["Clothing", "Footwear", "Jewelry"]
+      },
+      {
+        "name": "Kids",
+        "subsubcat": ["Clothing", "Footwear", "Toys"]
+      }
+    ]
+  }
+]

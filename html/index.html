@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mastors Ecommerce</title>
+    <!-- <meta name="csrf-token" content="{{ csrf_token }}"> -->
+
     <link rel="stylesheet" href="../styles.css">
     <!-- K2D -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -798,18 +800,19 @@
         </section>
     </nav>
     <!-- NAVBAR END -->
+
     <!-- MAIN START -->
     <main class="main bg" id="main">
         <!-- ADD PRODUCT START -->
-        <div class="product add-product g-res-3-col-container gap-10">
+        <form id="addProductForm" class="product add-product g-res-3-col-container gap-10">
 
             <!-- LEFT COLUMN -->
-            <aside class="span-3 relative">
+            <aside class="relative">
 
-                <!-- TITLE -->
+                <!-- PRODUCT TITLE -->
                 <section class="relative f-res f-col gap-10 v-space">
                     <label for="" class="star">Product Title</label>
-                    <input type="text" name="" id="" placeholder="Type the title of the product">
+                    <input type="text" name="productTitle" id="" placeholder="Type the title of the product">
                 </section>
 
                 <!-- CATEGORY -->
@@ -817,65 +820,25 @@
                     <legend class="thislegend star">Category</legend>
 
                     <!-- CATEGORY -->
-
                     <div class="combo-box w-100">
-                        <div class="Combo-inputbox"><input type="text" class="combo-input b-Blue b-1 b-rad--05"
-                                placeholder="-- Category --" data-combo-id="combo1"></div>
-                        <ul class="combo-options">
-                            <li class="combo-option">Option 1</li>
-                            <li class="combo-option">Option 2</li>
-                            <li class="combo-option">Option 3</li>
-                            <li class="combo-option">Option 4</li>
-                            <li class="combo-option">Option 5</li>
-                            <li class="combo-option">Option 6</li>
-                            <li class="combo-option">Option 7</li>
-                            <li class="combo-option">Option 8</li>
-                            <li class="combo-option">Option 9</li>
-                            <li class="combo-option">Option 10</li>
-                            <li class="combo-option">Option 11</li>
-                            <li class="combo-option">Option 12</li>
+                        <div class="Combo-inputbox">
+                            <input type="text" name="category" id="category" class="combo-input b-Blue b-1 b-rad--05"
+                                placeholder="-- Category --" data-combo-id="combo1" autocomplete="off">
+                        </div>
+                        <ul class="combo-options" id="categoryOptions">
                             <li class="no-data" style="display: none;">No data found!</li>
                         </ul>
                     </div>
-                    <!-- <div class="combo-box w-100">
-                        <input type="text" class="combo-input" placeholder="-- Category --">
-                        <span class="chevron-icon"><img
-                                src="https://surajit-singha-sisir.github.io/mastorsCDN/Resources/svg/chevron.svg"
-                                alt=""></span>
-                        <ul class="combo-options" style="display: none;">
-                            <li class="combo-option">Option 1</li>
-                            <li class="combo-option">Option 2</li>
-                            <li class="combo-option">Option 3</li>
-                            <li class="combo-option">Option 4</li>
-                            <li class="combo-option">Option 5</li>
-                            <li class="combo-option">Option 6</li>
-                            <li class="combo-option">Option 7</li>
-                            <li class="combo-option">Option 8</li>
-                            <li class="combo-option">Option 9</li>
-                            <li class="combo-option">Option 10</li>
-                            <li class="combo-option">Option 11</li>
-                            <li class="combo-option">Option 12</li>
-                            <li class="no-data" style="display: none;">No data found!</li>
-                        </ul>
-                    </div> -->
                     <!-- SUB-CATEGORY -->
                     <div class="option">
-                        <select>
-                            <option value="option0">-- Sub Cat--</option>
-                            <option value="option1">Sub Cat 1</option>
-                            <option value="option2">Sub Cat 2</option>
-                            <option value="option3">Sub Cat 3</option>
-                            <option value="option4">Sub Cat 4</option>
+                        <select name="subCategory" id="subCategory">
+                            <option value="false">-- Sub Cat --</option>
                         </select>
                     </div>
                     <!-- SUB-SUB-CATEGORY -->
                     <div class="option">
-                        <select>
-                            <option value="option0">-- Sub Sub --</option>
-                            <option value="option1">Sub Sub 1</option>
-                            <option value="option2">Sub Sub 2</option>
-                            <option value="option3">Sub Sub 3</option>
-                            <option value="option4">Sub Sub 4</option>
+                        <select name="subSubCategory" id="subSubCategory">
+                            <option value="false">-- Sub Sub --</option>
                         </select>
                     </div>
                 </fieldset>
@@ -887,30 +850,30 @@
                     <!-- Buy Price -->
                     <div class="text-input" id="text-input">
                         <label for="productBuyPrice">Buy Price</label>
-                        <input type="number" class="inputbox" placeholder="" id="productBuyPrice">
+                        <input type="number" class="inputbox" name="buyPrice" placeholder="" id="productBuyPrice">
                     </div>
 
                     <!-- Selling Price -->
                     <div class="text-input" id="text-input">
                         <label for="productSellingPrice">Selling Price</label>
-                        <input type="number" class="inputbox" id="productSellingPrice">
+                        <input type="number" name="sellingPrice" class="inputbox" id="productSellingPrice">
                     </div>
 
                     <!-- Discount Price -->
                     <div class="text-input" id="text-input">
                         <label for="productDiscountPrice">Discount Price</label>
-                        <input type="number" class="inputbox" id="productDiscountPrice">
+                        <input type="number" name="discountPrice" class="inputbox" id="productDiscountPrice">
                     </div>
 
                     <!-- UNIT -->
                     <div class="option">
-                        <select class="bg-Currency currency" id="productPricingCurrency">
-                            <option value="৳">৳ Taka</option>
-                            <option value="$">$ Dollar</option>
-                            <option value="₹">₹ Rupee</option>
-                            <option value="€">€ Euro</option>
-                            <option value="£">£ Pound</option>
-                            <option value="¥">¥ Yuan</option>
+                        <select class="bg-Currency currency" id="productPricingCurrency" name="priceUnit">
+                            <option value="taka" target-currency="৳">৳ Taka</option>
+                            <option value="dollar" target-currency="$">$ Dollar</option>
+                            <option value="rupee" target-currency="₹">₹ Rupee</option>
+                            <option value="euro" target-currency="€">€ Euro</option>
+                            <option value="pound" target-currency="£">£ Pound</option>
+                            <option value="yuan" target-currency="¥">¥ Yuan</option>
                         </select>
                     </div>
                 </fieldset>
@@ -920,14 +883,14 @@
                     <div class="f-res f-align-items-center f-just-center gap-10 w-80">
                         <span class="f-0 text--m star">Stock</span>
                         <div class="select-option-1">
-                            <input class="min-w--20" type="number" id="addProductTotalStock"
+                            <input class="min-w--20" name="stock" type="number" id="addProductTotalStock"
                                 placeholder="Total Quantity">
                             <div class="option">
-                                <select>
-                                    <option value="option1">Piece</option>
-                                    <option value="option2">Packet</option>
-                                    <option value="option3">Box</option>
-                                    <option value="option4">Carton</option>
+                                <select name="stockUnit" id="addProductStockUnit">
+                                    <option value="Piece">Piece</option>
+                                    <option value="Packet">Packet</option>
+                                    <option value="Box">Box</option>
+                                    <option value="Carton">Carton</option>
                                 </select>
                             </div>
                         </div>
@@ -942,7 +905,7 @@
                     <div class="pad--10 b-b-e m-b--10">
                         <div class="combo-box">
                             <div class="Combo-inputbox">
-                                <input type="text" data-target="" id="attrInp" class="combo-input"
+                                <input type="text" data-target="" name="attribute" id="attrInp" class="combo-input"
                                     placeholder="-- Select Atributes --" data-combo-id="combo1" autocomplete="off">
                                 <ul class="combo-options attributeSelect" id="attributeSelect" style="display: none;">
                                     <li class="no-data" style="display: none;">No data found!</li>
@@ -978,7 +941,7 @@
                                         <input type="text" id="attributeValueOption" placeholder="Variable Name">
                                     </div>
                                     <!-- SUBMIT BUTTON -->
-                                    <button type="submit" id="addNewAttributeValue">Submit</button>
+                                    <button id="addNewAttributeValue">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -991,7 +954,6 @@
                                         <th id="attributeCat">Size</th>
                                         <th>Stock(Qty)</th>
                                         <th>Price</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -1005,7 +967,7 @@
                 <!-- TEXT EDITOR -->
                 <section class="summernote">
                     <span class="text--m star">Description</span><br><br>
-                    <textarea class="summernote" name="" id="summernote"></textarea>
+                    <textarea class="summernote" name="summerNote" id="summernote"></textarea>
                     <script>
                         $('#summernote').summernote({
                             placeholder: '1. Introduction <br><br> 2. Describe your product<br><br> <i>Add your product Images and Text Sizes to get Notice</i>',
@@ -1057,17 +1019,43 @@
                         </div>
                     </div>
                 </section>
+
             </aside>
 
             <!-- RIGHT COLUMN -->
-            <aside class="span-1">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque pariatur libero voluptates perferendis
-                quia. Laboriosam ullam, aliquid, vero quasi distinctio facere explicabo ipsam exercitationem, deleniti
-                amet maiores. Molestias, velit asperiores?
-            </aside>
-        </div>
-        <!-- ADD PRODUCT END -->
+            <aside class="addProductRightColumn">
 
+                <!-- PRODUCT IMAGES -->
+                <section class="e-productImage">
+                    <span class="text--m productImagesTitle">Product Images <span class=" star">(0/5)</span></span>
+
+                    <div class="pad--20 m-tb--10 fileInputBox">
+                        <input type="file" name="" id="dragAndDropFile" accept=".jpg, .jpeg" multiple>
+                        <p class="uploadOrDragImage">Upload or Drag Image</p>
+                    </div>
+
+
+                    <!-- PREVIEW IMAGES -->
+                    <div class="dragable-image-container gap-10 hide">
+                        <span class="preview-img-container">
+                        </span>
+                        <span class="preview-img-container">
+                        </span>
+                        <span class="preview-img-container">
+                        </span>
+                        <span class="preview-img-container">
+                        </span>
+                        <span class="preview-img-container">
+                        </span>
+                    </div>
+                </section>
+            </aside>
+            <!-- SUBMIT FORM -->
+            <section class="submitForm">
+                <input type="submit" value="Submit" class="btn btn-primary w--200">
+            </section>
+        </form>
+        <!-- ADD PRODUCT END -->
     </main>
     <!-- MAIN END -->
 </body>

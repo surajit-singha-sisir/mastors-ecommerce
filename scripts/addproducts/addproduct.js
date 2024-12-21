@@ -12,19 +12,6 @@ const xhr = new XMLHttpRequest();
 const url = "../JSON/attribute.json";
 
 // LOAD ATTRIBUTES
-/**
- * Loads attributes from a server and dynamically updates the DOM with the received data.
- *
- * This function sends an asynchronous GET request to the specified URL. When the request
- * is complete and successful, it parses the JSON response and updates the DOM by appending
- * new <li> elements to the attribute selection list and the new value assigning options list.
- *
- * The function also calls `attribute` and `addNewAttributeValue` after updating the DOM.
- *
- * @function
- * @name loadAttribute
- * @global
- */
 function loadAttribute() {
   xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
@@ -58,12 +45,6 @@ function loadAttribute() {
   xhr.send();
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-  addAttributeBtn();
-  deleteTableRowInDeleteButton();
-  loadAttribute();
-});
-
 function attribute() {
   const attris = document.querySelectorAll(".attributeSelect li");
   const attrInp = document.getElementById("attrInp");
@@ -84,7 +65,11 @@ function attribute() {
   };
 
   const updateRowPrices = () => {
-    const currentSelect = currencySelect.value.replace(/\s+/g, "");
+    const currentSelect = currencySelect.value
+      .replace(/\s+/g, "")
+      .toLowerCase();
+    console.log(currentSelect);
+
     const newPrice = calculatePrice();
     attributeTable.querySelectorAll("tr").forEach((row) => {
       const priceButton = row.querySelector(".btn1");
@@ -141,8 +126,7 @@ function attribute() {
         const html = `<tr data-value="${valueText}">
                         <td>${value}</td>
                         <td><input type="number" class="tableQty" name="${valueText}" id="${valueText}" min="1" placeholder="Qty"></td>
-                        <td><button class="btn1" targer-price="${newPrice}">${currencySelect.value} ${newPrice}</button></td>
-                        <td class="attrDeleteBtn"><img class="img-h-res" src="../resources/icons/delete.svg"></td>
+                        <td><button class="btn1" targer-price="${newPrice}">${newPrice} ${currencySelect.value}</button></td>
                       </tr>`;
         attributeTable.innerHTML += html;
       }
@@ -197,7 +181,7 @@ function attribute() {
         });
       [sellingPriceInput, discountPriceInput, currencySelect].forEach(
         (input) => {
-          input.addEventListener("input", updateRowPrices);
+          input.addEventListener("change", updateRowPrices);
         }
       );
     });
@@ -321,7 +305,92 @@ function addNewAttributeValue() {
     });
   }
 }
+class categoryFields {
+  xhr() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "../JSON/category.json", true);
+    xhr.send();
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          let data = JSON.parse(xhr.responseText);
+          const categoryOptions = document.getElementById("categoryOptions");
 
+          // CATEGORY
+          console.log(data);
+
+          const category = data.map((key, i) => data[i].category);
+          // console.log(category);
+
+          categoryOptions.innerHTML = category
+            .map((key) => `<li class="combo-option" id="${key}">${key}</li>`)
+            .join("");
+
+          // SUBCATEGORY
+          const subCategory = document.getElementById("subCategory");
+          subCategory.disabled = true;
+
+          categoryOptions.addEventListener("click", (event) => {
+            subCategory.disabled = false;
+            const selectedCategory = event.target.textContent.trim();
+
+            data.some((item) => {
+              if (item.category === selectedCategory) {
+                // console.log(item);
+
+                const subCategoryList = item.subcat;
+                // console.log(subCategoryList);
+
+                subCategory.innerHTML = subCategoryList
+                  .map(
+                    (key) =>
+                      `<option value="${key.name.replace(/\s+/g, "")}">${
+                        key.name
+                      }</option>`
+                  )
+                  .join("");
+              }
+            });
+          });
+
+          // SUBSUBCATEGORY
+          const subSubCategory = document.getElementById("subSubCategory");
+          subSubCategory.disabled = true;
+
+          subCategory.addEventListener("change", (event) => {
+            subSubCategory.disabled = false;
+            const selectedSubCategory =
+              event.target.options[event.target.selectedIndex].textContent;
+
+            data.some((item) => {
+              if (item.subcat.some((sub) => sub.name === selectedSubCategory)) {
+                const subSubCatList = item.subcat.find(
+                  (sub) => sub.name === selectedSubCategory
+                ).subsubcat;
+
+                subSubCategory.innerHTML = subSubCatList
+                  .map(
+                    (subsub) =>
+                      `<option value="${subsub.replace(
+                        /\s+/g,
+                        ""
+                      )}">${subsub}</option>`
+                  )
+                  .join("");
+              }
+            });
+          });
+        } else {
+          const subCategory = document.getElementById("subCategory");
+          const subSubCategory = document.getElementById("subSubCategory");
+          subCategory.disabled = true;
+          subSubCategory.disabled = true;
+          showToast(`Error fetching data: ${xhr.status}`, "error");
+        }
+      }
+    };
+  }
+}
 class addTags {
   tags() {
     const tagContainer = document.getElementById("e-tags");
@@ -417,26 +486,29 @@ class faqs {
     const question = inputContainer.querySelector("#e-questionInput");
     const answer = inputContainer.querySelector("#e-answerInput");
 
-    inputContainer.querySelector("#faqAddBtn").addEventListener("click", () => {
-      if (question.value && answer.value) {
-        // Check for duplicate question
-        const isDuplicate = Array.from(
-          allPreview.querySelectorAll(".added-question")
-        ).some(
-          (q) =>
-            q.textContent.trim().toLowerCase() ===
-            question.value.trim().toLowerCase()
-        );
+    inputContainer
+      .querySelector("#faqAddBtn")
+      .addEventListener("click", (e) => {
+        e.preventDefault();
+        if (question.value && answer.value) {
+          // Check for duplicate question
+          const isDuplicate = Array.from(
+            allPreview.querySelectorAll(".added-question")
+          ).some(
+            (q) =>
+              q.textContent.trim().toLowerCase() ===
+              question.value.trim().toLowerCase()
+          );
 
-        if (isDuplicate) {
-          showToast("Duplicate Item", "error");
-          return;
-        }
+          if (isDuplicate) {
+            showToast("Duplicate Item", "error");
+            return;
+          }
 
-        faqPreview.classList.remove("hide");
+          faqPreview.classList.remove("hide");
 
-        // ADD FAQ TO FAQ PREVIEW
-        const html = `
+          // ADD FAQ TO FAQ PREVIEW
+          const html = `
         <!-- FAQ-1 -->
         <span class="added-faq">
         <i class="e-faq-counter">${allPreview.children.length + 1}</i>
@@ -447,18 +519,18 @@ class faqs {
         <i class="m-compose" title="Edit FAQ" target-title="Edit"></i>
         <i class="m-bin" title="Delete FAQ" target-title="Edit"></i>
         </span>`;
-        allPreview.innerHTML += html;
+          allPreview.innerHTML += html;
 
-        // Clear input fields
-        question.value = "";
-        answer.value = "";
+          // Clear input fields
+          question.value = "";
+          answer.value = "";
 
-        // Hide preview if no FAQs
-        if (allPreview.children.length === 0) {
-          faqPreview.classList.add("hide");
+          // Hide preview if no FAQs
+          if (allPreview.children.length === 0) {
+            faqPreview.classList.add("hide");
+          }
         }
-      }
-    });
+      });
 
     // Edit and Delete actions
     allPreview.addEventListener("click", (event) => {
@@ -508,12 +580,158 @@ class faqs {
   }
 }
 
+class productImage {
+  uploadManager() {
+    // INPUT TAG
+    const dragAndDropFile = document.getElementById("dragAndDropFile");
+    dragAndDropFile.addEventListener("change", (event) => {
+      const file = event.target.files[0];
+
+      const img = new Image();
+      img.src = URL.createObjectURL(file); //BLOB URL
+
+      let imageLinkArray = [];
+
+      img.onload = () => {
+        const width = img.width;
+        const height = img.height;
+        const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
+        const commonFactor = gcd(width, height);
+        const newWidth = width / commonFactor;
+        const newHeight = height / commonFactor;
+
+        URL.revokeObjectURL(file); //CLEAN BLOB
+        showToast("Image added", "success");
+
+        // ADD IMAGE TO DOM
+        const imageContainer = document.querySelector(
+          ".dragable-image-container"
+        );
+
+        imageContainer.classList.remove("hide");
+        imageLinkArray.push(img.src);
+
+        // HANDLE MULTIPLE FILES
+        const files = event.target.files;
+        for (let file of files) {
+          const img = new Image();
+          img.src = URL.createObjectURL(file); //BLOB URL
+
+          img.onload = () => {
+            const width = img.width;
+            const height = img.height;
+            const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
+            const commonFactor = gcd(width, height);
+            const newWidth = width / commonFactor;
+            const newHeight = height / commonFactor;
+
+            URL.revokeObjectURL(file); //CLEAN BLOB
+
+            // ADD IMAGE TO DOM
+            const imageContainer = document.querySelector(
+              ".dragable-image-container"
+            );
+
+            imageContainer.classList.remove("hide");
+            imageLinkArray.push(img.src);
+            const previews = imageContainer.querySelectorAll(
+              ".preview-img-container"
+            );
+
+            // UPDATE SECOND AND OTHER PREVIEWS
+            for (let i = previews.length - 1; i > 0; i--) {
+              if (previews[i - 1].querySelector("img")) {
+                previews[i].innerHTML = `<img src="${
+                  previews[i - 1].querySelector("img").src
+                }" class="draggable" draggable="true">`;
+              }
+            }
+            // UPDATE FIRST PREVIEW
+            previews[0].innerHTML = `<img src="${img.src}" class="draggable" draggable="true">`;
+          };
+        }
+      };
+    });
+  }
+}
+class FormDataHandler {
+  constructor(formId) {
+    this.formElement = document.getElementById(formId); // Reference the form
+  }
+
+  // CSRF TOKEN
+  getCSRFToken() {
+    const csrfToken = document
+      .querySelector('meta[name="csrf-token"]')
+      .getAttribute("content");
+    return csrfToken;
+  }
+
+  sendFormData() {
+    const submit = document.querySelector(".submitForm input[type='submit']");
+
+    submit.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      // Collect all form data
+      const form = new FormData(this.formElement);
+
+      // Convert form data to JSON for demonstration
+      const formDataObject = {};
+      form.forEach((value, key) => {
+        formDataObject[key] = value;
+      });
+
+      console.log("Form Data Object:", formDataObject); // Debugging
+
+      // XHR Request
+      this.sendXHR(form);
+    });
+  }
+
+  // XHR
+  sendXHR(form) {
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://jsonplaceholder.typicode.com/posts", true);
+    // const csrfToken = getCSRFToken(); // Get CSRF token
+    // xhr.setRequestHeader("X-CSRFToken", csrfToken);
+    // xhr.setRequestHeader("Content-Type", "application/json");
+
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status === 201) {
+          showToast("Data has been sent successfully", "success");
+        } else {
+          showToast(`Error: ${xhr.status}`, "error");
+        }
+      }
+    };
+
+    // Send the form data directly
+    xhr.send(form);
+  }
+}
+
+// DOCUMENT READY
 document.addEventListener("DOMContentLoaded", () => {
+  addAttributeBtn();
+  deleteTableRowInDeleteButton();
+  loadAttribute();
+  const category = new categoryFields();
+  category.xhr();
+
   const tag = new addTags();
   tag.tags();
 
   const faqData = new faqs();
   faqData.faq();
+
+  const productImageUpload = new productImage();
+  productImageUpload.uploadManager();
+
+  // SEND FORM DATA
+  const formHandler = new FormDataHandler("addProductForm");
+  formHandler.sendFormData();
 });
 
 // TOAST MESSAGE FUNCTION : "success" , "error" , "info" , "warning"

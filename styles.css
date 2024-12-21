@@ -425,6 +425,17 @@ li {
     flex-wrap: wrap;
   }
 }
+@media screen and (max-width: 1620px) {
+  .g-res-3-col-container {
+    grid-template-columns: 1fr !important;
+  }
+}
+.submitForm {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .attributes {
   position: relative;
 }
@@ -704,6 +715,59 @@ button[type=submit]:hover {
 .e-faqs .e-faq-preview .e-faq-preview-box .added-faq .m-compose:hover,
 .e-faqs .e-faq-preview .e-faq-preview-box .added-faq .m-bin:hover {
   color: #0a286e;
+  transition: all 0.3s ease;
+}
+
+.addProductRightColumn {
+  position: relative;
+  width: 100%;
+}
+
+.e-productImage {
+  position: relative;
+  padding: 1rem 0;
+  width: inherit;
+  overflow: hidden;
+}
+.e-productImage .dragable-image-container {
+  padding: 1rem 0;
+}
+.e-productImage .preview-img-container {
+  background-color: rgb(226.2780487805, 230.0243902439, 232.5219512195);
+  max-width: 500px;
+  width: 100%;
+}
+.e-productImage .fileInputBox {
+  position: relative;
+  width: 100%;
+  height: 5rem;
+  border: 1px dashed #d4d8dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f7fa;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+.e-productImage .fileInputBox #dragAndDropFile {
+  opacity: 0;
+  width: inherit;
+  height: inherit;
+}
+.e-productImage .fileInputBox .uploadOrDragImage {
+  position: absolute;
+  font-size: 1rem;
+  color: rgb(158.8361508453, 158.8361508453, 158.8361508453);
+  cursor: pointer;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.e-productImage .fileInputBox:hover {
+  border: 1px dashed #0a6e50;
+  transition: all 0.3s ease;
+}
+.e-productImage .fileInputBox:hover .uploadOrDragImage {
+  color: rgb(86.5, 110, 102.95);
   transition: all 0.3s ease;
 }
 
